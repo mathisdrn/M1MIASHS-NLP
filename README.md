@@ -6,6 +6,10 @@ To view the content of this research study, you can either:
 - Visit the [hosted version](https://mathisdrn.github.io/M1MIASHS-NLP/) of this project
 - Download the [PDF version](https://raw.githubusercontent.com/mathisdrn/M1MIASHS-NLP/master/exports/project.pdf) of this project
 
+### Project description
+
+Train a French spam classifier using TfidfVectorizer features. Compare the performance of Naive Bayes, Logistic Regression, and SVM classifiers
+
 ### Usage
 
 To run the code in this repository, you will need to create a conda environment with the dependencies specified in the `requirements.yml` file. You can do so by running the following command in your terminal:
