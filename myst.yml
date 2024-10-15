@@ -26,7 +26,7 @@ project:
       template: lapreprint-typst
       output: ./exports/project.pdf
       articles:
-        - file: Paper.md
+        - file: PROJET.md
   downloads:
   - file: https://raw.githubusercontent.com/mathisdrn/M1MIASHS-NLP/master/exports/project.pdf
     title: PDF version
