@@ -1,9 +1,9 @@
-# NLP Project
+# Spam Detection - Natural Language Processing Project
 
-This repository hosts the code, text and data of a research study on the relation between head coach and change of performance in football teams. 
+This repository hosts the code, text and data of a spam detection NLP Project followed in M1 MIASHS.
 
 To view the content of this research study, you can either:
-- Visit the [hosted version](https://mathisdrn.github.io/M1MIASHS-NLP/) of this paper
+- Visit the [hosted version](https://mathisdrn.github.io/M1MIASHS-NLP/) of this project
 - Download the [PDF version](https://raw.githubusercontent.com/mathisdrn/M1MIASHS-NLP/master/exports/project.pdf) of this project
 
 ### Usage

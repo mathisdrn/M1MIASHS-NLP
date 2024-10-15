@@ -1,8 +1,8 @@
 ---
-title: Projet NLP - M1 MIASHS
-subject: Projet NLP - M1 MIASHS
-short_title: Projet NLP
-banner: ./assets/banner.jpg
+title: Spam Detection Project - M1 MIASHS
+subject: Spam Detection
+short_title: Spam Detection
+banner: ./assets/banner.png
 license: CC-BY-4.0
 keywords: 
 date: 2024-04-14
