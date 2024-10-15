@@ -1,0 +1,36 @@
+# See docs at: https://mystmd.org/guide/frontmatter
+version: 1
+project:
+  title: NLP M1 MIASHS
+  github: https://github.com/mathisdrn/M1MIASHS-NLP/
+  license:
+    content: CC-BY-SA-4.0
+    code: MIT
+  subject: research
+  date: 2024-02-10
+  authors: 
+    - name: Bastien Monjot
+      affiliation: uol
+    - name: Mathis Derenne
+      affiliation: uol
+      github: mathisdrn
+    - name: Maxime
+      affiliation: uol
+    - name: Safaa
+      affiliation: uol
+  affiliations: 
+    - id: uol
+      institution: University of Lyon
+  exports:
+    - format: typst
+      template: lapreprint-typst
+      output: ./exports/project.pdf
+      articles:
+        - file: Paper.md
+  downloads:
+  - file: https://raw.githubusercontent.com/mathisdrn/M1MIASHS-NLP/master/exports/project.pdf
+    title: PDF version
+    filename: project.pdf
+site:
+  title: "Projet NLP - M1 MIASHS"
+  template: article-theme
