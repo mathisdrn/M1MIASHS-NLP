@@ -32,7 +32,7 @@ country <- c("ENG", "ESP", "ITA", "GER", "FRA")
 year <- c(2015:2022)
 :::
 
-Enfin, la lecture de Fundamentals of Data Visualization [@DataViz] a permis d'améliorer la qualité des graphiques et de la présentation des données en les rendants plus clairs et informatifs.
+Enfin, la lecture de Fundamentals of Data Visualization a permis d'améliorer la qualité des graphiques et de la présentation des données en les rendants plus clairs et informatifs.
 
 :::{caution}
 Une p-valeur faible dans le cadre de la corrélation de Pearson ne signifie pas nécessairement qu'il existe une relation de cause à effet entre les deux variables observées. Elle indique simplement que la corrélation observée est statistiquement significative. Ainsi, les hypothèses explicatives fournies sont simplement des hypothèses plausibles et non des conclusions définitives.
