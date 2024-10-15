@@ -2,7 +2,7 @@
 title: Projet NLP - M1 MIASHS
 subject: Projet NLP - M1 MIASHS
 short_title: Projet NLP
-banner: ./misc/banner.jpg
+banner: ./assets/banner.jpg
 license: CC-BY-4.0
 keywords: 
 date: 2024-04-14
