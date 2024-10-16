@@ -9,3 +9,5 @@ Icon
 .vscode
 
 exports/*
+assets/*.png
+data/*.pkl
