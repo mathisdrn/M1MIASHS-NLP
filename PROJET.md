@@ -39,6 +39,24 @@ Les données sont issues d'un jeu de données disponible sur [Kaggle](https://ww
 
 Description des bases du CountVectorizer et du TdifTransformer
 
+## Les modèles
+
+### Preprocessing 
+
+#### Différence de proportion des classes 
+
+Définir risque première espèce et risque seconde espèce
+Présenter le trade-off entre les deux
+
+Expliquer les risques lorsque les classes du jeu d'entraînement sont trop disproportionné :
+- le modèle n'apprend pas suffisamment à distinguer la classe minoritaire
+- l'évaluation d'un modèle de classification binaire est biaisé car la classification de la classe minoritaire est sous représenté, etc.
+
+Présenter les techniques permettant d'améliorer l'entraînement d'un modèle avec des classes disproportionés : technique de resampling (SMOTE), paramètre de poids des classes dans la regression logistique et SVC (class weight = 'balanced' (voir doc)), ajustement du seuil en sortie de modèle
+
+
+### 
+
 ```{mermaid}
 ---
 title: "Spam Classifier Model"
@@ -61,8 +79,6 @@ flowchart LR
     style B fill:#d1c4e9,stroke:#8e44ad,stroke-width:2px
     style C fill:#b2dfdb,stroke:#16a085,stroke-width:2px
 ```
-
-## Les modèles utilisés
 
 Description des modèles 
 

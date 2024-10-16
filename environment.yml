@@ -13,6 +13,7 @@ dependencies:
   - scikit-learn
   - statsmodels
   - scapy
+  - nltk
   - matplotlib
   - seaborn
   - mystmd
