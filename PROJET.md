@@ -21,7 +21,7 @@ Spam : Ce terme est utilisé pour décrire les emails indésirables, souvent env
 
 ## Source des données
 
-Les données sont issues de [Kaggle](https://www.kaggle.com/datasets/rajnathpatel/multilingual-spam-data/).
+Les données sont issues d'un jeu de données disponible sur [Kaggle](https://www.kaggle.com/datasets/rajnathpatel/multilingual-spam-data/).
 
 :::{table} Extrait du jeu de donnée
 :label: table_original_data_head1
@@ -98,6 +98,27 @@ ROC Curve of Logistic Regression model
 
 ### Support-vector clustering
 
+:::{table} Classification report of Support-vector clustering model
+:label: table_report_SVC1
+:align: center
+![](#table_report_SVC)
+:::
+
+:::{figure} #figure_pr_SVC
+:name: figure_pr_SVC1
+:align: center
+:height: 2em
+:width: 2em
+Precision-Recall Curve of Support-vector clustering model
+:::
+
+:::{figure} #figure_roc_SVC
+:name: figure_roc_SVC1
+:align: center
+:height: 2em
+:width: 2em
+ROC Curve of Support-vector clustering model
+:::
 
 ## Exemple des possibilités du Markdown 
 
@@ -120,6 +141,8 @@ Some latex : $\frac{p}{n} = \Delta$
     - sub list 2
 2. List 2
     - sub list 1
+
+Possibilité de faire référence à une [table](#table_report_LR1) ou une figure [](#figure_roc_SVC1)
 
 ## Conclusion
 
