@@ -23,7 +23,7 @@ Spam : Ce terme est utilisé pour décrire les emails indésirables, souvent env
 
 Les données sont issues d'un jeu de données disponible sur [Kaggle](https://www.kaggle.com/datasets/rajnathpatel/multilingual-spam-data/).
 
-:::{table} Extrait du jeu de donnée
+:::{table} Extrait du jeu de donnée original
 :label: table_original_data_head1
 :align: center
 ![](#table_original_data_head)
@@ -38,6 +38,29 @@ Les données sont issues d'un jeu de données disponible sur [Kaggle](https://ww
 ## Bases théoriques
 
 Description des bases du CountVectorizer et du TdifTransformer
+
+```{mermaid}
+---
+title: "Spam Classifier Model"
+---
+flowchart LR
+    A[(Labeled data)] --> B[CountVectorizer]
+    B --> C[TfidfTransformer]
+    
+    subgraph Models
+        D([Naive Bayes])
+        E([SVC])
+        F([Logistic Regression])
+    end
+    
+    C --> D
+    C --> E
+    C --> F
+
+    style A fill:#ffecb3,stroke:#f39c12,stroke-width:2px
+    style B fill:#d1c4e9,stroke:#8e44ad,stroke-width:2px
+    style C fill:#b2dfdb,stroke:#16a085,stroke-width:2px
+```
 
 ## Les modèles utilisés
 
