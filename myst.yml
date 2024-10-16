@@ -1,7 +1,7 @@
 # See docs at: https://mystmd.org/guide/frontmatter
 version: 1
 project:
-  title: NLP M1 MIASHS
+  title: Spam Detection NLP Project
   github: https://github.com/mathisdrn/M1MIASHS-NLP/
   license:
     content: CC-BY-SA-4.0
@@ -14,9 +14,9 @@ project:
     - name: Mathis Derenne
       affiliation: uol
       github: mathisdrn
-    - name: Maxime .
+    - name: Maxime Planquette
       affiliation: uol
-    - name: Safaa .
+    - name: Safaa Jouini
       affiliation: uol
   affiliations: 
     - id: uol
@@ -32,5 +32,5 @@ project:
     title: PDF version
     filename: project.pdf
 site:
-  title: "Projet NLP - M1 MIASHS"
+  title: "Spam Detection - NLP Project"
   template: article-theme

@@ -5,8 +5,10 @@ channels:
 dependencies:
   - python=3.11
   - ipykernel
+  - ipywidgets
   - nbstripout
   - pandas
+  - jinja2
   - numpy
   - scikit-learn
   - statsmodels
