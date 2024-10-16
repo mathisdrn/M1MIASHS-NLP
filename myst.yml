@@ -1,13 +1,13 @@
 # See docs at: https://mystmd.org/guide/frontmatter
 version: 1
 project:
-  title: Spam Detection NLP Project
+  title: Spam Classification Model
   github: https://github.com/mathisdrn/M1MIASHS-NLP/
   license:
     content: CC-BY-SA-4.0
     code: MIT
-  subject: research
-  date: 2024-02-10
+  subject: course project
+  date: 2024-10-20
   authors: 
     - name: Bastien Monjot
       affiliation: uol
