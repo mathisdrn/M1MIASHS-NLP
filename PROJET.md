@@ -58,9 +58,7 @@ Présenter les techniques permettant d'améliorer l'entraînement d'un modèle a
 ### 
 
 ```{mermaid}
----
-title: "Spam Classifier Model"
----
+
 flowchart LR
     A[(Labeled data)] --> B[CountVectorizer]
     B --> C[TfidfTransformer]
@@ -89,25 +87,20 @@ Le rappel (recall) répond à la question : de tous les cas positifs, combien so
 
 ### Naive Bayes
 
+Possibilité de faire référence à une [table](#table_report_bayes1) ou une figure : [](#figure_pr_bayes1)
+
 :::{table} Classification report of Naive Bayes model
 :label: table_report_bayes1
-:align: center
 ![](#table_report_bayes)
 :::
 
 :::{figure} #figure_pr_bayes
 :name: figure_pr_bayes1
-:align: center
-:height: 2em
-:width: 2em
 Precision-Recall Curve of Naive Bayes model
 :::
 
 :::{figure} #figure_roc_bayes
 :name: figure_roc_bayes1
-:align: center
-:height: 2em
-:width: 2em
 ROC Curve of Naive Bayes model
 :::
 
@@ -121,17 +114,11 @@ ROC Curve of Naive Bayes model
 
 :::{figure} #figure_pr_LR
 :name: figure_pr_LR1
-:align: center
-:height: 2em
-:width: 2em
 Precision-Recall Curve of Logistic Regression model
 :::
 
 :::{figure} #figure_roc_LR
 :name: figure_roc_LR1
-:align: center
-:height: 2em
-:width: 2em
 ROC Curve of Logistic Regression model
 :::
 
@@ -145,17 +132,11 @@ ROC Curve of Logistic Regression model
 
 :::{figure} #figure_pr_SVC
 :name: figure_pr_SVC1
-:align: center
-:height: 2em
-:width: 2em
 Precision-Recall Curve of Support-vector clustering model
 :::
 
 :::{figure} #figure_roc_SVC
 :name: figure_roc_SVC1
-:align: center
-:height: 2em
-:width: 2em
 ROC Curve of Support-vector clustering model
 :::
 
@@ -180,8 +161,6 @@ Some latex : $\frac{p}{n} = \Delta$
     - sub list 2
 2. List 2
     - sub list 1
-
-Possibilité de faire référence à une [table](#table_report_LR1) ou une figure [](#figure_roc_SVC1)
 
 ## Conclusion
 
