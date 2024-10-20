@@ -13,7 +13,7 @@ Dans ce projet recherche nous avons choisi de ...
 
 ## Introduction 
 
-Rappeler l'importance de la détection de spams (sécurité, arnaque, etc.). Rappeler que les hébergeurs des principales boîtes mail assurent ce travail de filtre au quotidien.
+Aujourd'hui, les gens utilisent des services de messagerie électronique tels que Gmail, Outlook, AOL Mail, etc. pour communiquer entre eux le plus rapidement possible afin d'envoyer des informations et des lettres officielles. Le courrier indésirable ou le spam est un défi majeur pour ce type de communication, souvent envoyé par des botnets dans le but de faire de la publicité, de nuire et de voler des informations en masse à différentes personnes. Recevoir quotidiennement des courriels indésirables remplit la boîte de réception. Par conséquent, la détection du spam est un défi fondamental, jusqu'à présent, de nombreux travaux ont été réalisés pour détecter le spam en utilisant des méthodes de regroupement et de catégorisation de texte. Dans ce projet, nous utilisons les bibliothèques de traitement du langage naturel spaCy et NLTK ainsi que 3 algorithmes d'apprentissage automatique : le Naive Bayes (NB) en langage de programmation Python pour détecter les courriels indésirables collectés à partir d'un ensemble de données Kaggle. Les observations montrent un taux de précision de 96% pour l'algorithme Naive Bayes dans la détection du spam.
 
 Ham : C'est un terme utilisé pour décrire les emails qui sont authentiques et qui ne sont pas considérés comme du spam. Les emails de type "ham" sont ceux que les utilisateurs veulent recevoir, comme des correspondances personnelles, des newsletters auxquelles ils se sont abonnés, etc.
 
@@ -95,12 +95,12 @@ Possibilité de faire référence à une [table](#table_report_bayes1) ou une fi
 :::
 
 :::{figure} #figure_pr_bayes
-:name: figure_pr_bayes1
+:label: figure_pr_bayes1
 Precision-Recall Curve of Naive Bayes model
 :::
 
 :::{figure} #figure_roc_bayes
-:name: figure_roc_bayes1
+:label: figure_roc_bayes1
 ROC Curve of Naive Bayes model
 :::
 
@@ -108,17 +108,16 @@ ROC Curve of Naive Bayes model
 
 :::{table} Classification report of Logistic Regression model
 :label: table_report_LR1
-:align: center
 ![](#table_report_LR)
 :::
 
 :::{figure} #figure_pr_LR
-:name: figure_pr_LR1
+:label: figure_pr_LR1
 Precision-Recall Curve of Logistic Regression model
 :::
 
 :::{figure} #figure_roc_LR
-:name: figure_roc_LR1
+:label: figure_roc_LR1
 ROC Curve of Logistic Regression model
 :::
 
@@ -131,12 +130,12 @@ ROC Curve of Logistic Regression model
 :::
 
 :::{figure} #figure_pr_SVC
-:name: figure_pr_SVC1
+:label: figure_pr_SVC1
 Precision-Recall Curve of Support-vector clustering model
 :::
 
 :::{figure} #figure_roc_SVC
-:name: figure_roc_SVC1
+:label: figure_roc_SVC1
 ROC Curve of Support-vector clustering model
 :::
 
