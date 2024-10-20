@@ -8,6 +8,8 @@ sns.set_theme(context='paper', style='ticks', palette='deep', color_codes=True)
 plt.rcParams['figure.autolayout'] = True
 plt.rcParams['figure.figsize'] = (4, 3)
 plt.rcParams['figure.dpi'] = 100
+# plt.style.use('https://pltstyle.s3.eu-west-1.amazonaws.com/zinc.mplstyle')
+
 
 def roc_plot(y_true, y_val_proba):
     fpr, tpr, _ = roc_curve(y_true, y_val_proba)

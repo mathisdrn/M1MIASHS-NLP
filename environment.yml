@@ -12,7 +12,7 @@ dependencies:
   - numpy
   - scikit-learn
   - statsmodels
-  - scapy
+  - spacy
   - nltk
   - matplotlib
   - seaborn
