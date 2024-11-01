@@ -36,16 +36,12 @@ Les données sont issues d'un jeu de données disponible sur [Kaggle](https://ww
 :::
 
 ## Bases théoriques
-
+### Différence de proportion des classes 
 Description des bases du CountVectorizer et du TdifTransformer
 
-## Les modèles
-
-### Preprocessing 
-
-#### Différence de proportion des classes 
-
 Définir risque première espèce et risque seconde espèce
+Définition de risque premier 
+
 Présenter le trade-off entre les deux
 
 Expliquer les risques lorsque les classes du jeu d'entraînement sont trop disproportionné :
@@ -53,7 +49,17 @@ Expliquer les risques lorsque les classes du jeu d'entraînement sont trop dispr
 - l'évaluation d'un modèle de classification binaire est biaisé car la classification de la classe minoritaire est sous représenté, etc.
 
 Présenter les techniques permettant d'améliorer l'entraînement d'un modèle avec des classes disproportionés : technique de resampling (SMOTE), paramètre de poids des classes dans la regression logistique et SVC (class weight = 'balanced' (voir doc)), ajustement du seuil en sortie de modèle
+## Les modèles
 
+### Preprocessing 
+
+Les étapes de Preprocessing sont :
+- Le nettoyage de données : conversion des majuscules en minuscules pour harmoniser le texte. Il peut y avoir aussi par exemple la suppresion des ponctuations.
+- Etapes normalisation du texte
+    - Tokenisation : division du texte en unités linguistiques, appelés tokens. Cela permet de transformer le texte en sous-parties ou en séquence de mots
+    - Stops words : signifie suprimmer des mots très fréquents dans le texte qui ne sont souvent pas pertinents pour l'analyse
+    - Stemming : Tronque les mots à leur racine, sans prendre en compte leur contexte
+- La dernière étape consiste à transformer les textes en valeurs numérique en utilisant par exemple la commande TdifTransformer.
 
 ### 
 
@@ -83,7 +89,9 @@ flowchart LR
 Le classificateur de Naïve Bayes est un algorithme de machine learning supervisé. Il est utilisé comme méthode de 
 classification basée sur le théorème de Bayes. Il repose sur une hypothèse simplificatrice selon laquelle chaque 
 caractéristique fonctionne indépendamment des autres, ce qui rend les calculs plus rapides.
+
 Comment fonctionne la méthode de Bayes :
+
 Pour classifier des textes, comme dans les applications de détection de spam ou de non-spam pour les e-mails, ou pour la 
 catégorisation automatique d'articles, Naïve Bayes modélise la probabilité qu'un texte appartienne à une catégorie spécifique en se 
 basant sur les mots qu'il contient. Chaque mot (ou groupe de mots) est considéré comme une caractéristique du texte, et l'algorithme 
@@ -112,7 +120,9 @@ La régression logistique utilise une fonction logistique pour transformer une c
 Modèle : Le modèle évalue une probabilité en se basant sur plusieurs variables d'entrée. Par exemple, pour déterminer si un e-mail est un spam, il peut prendre en compte des caractéristiques telles que le nombre de mots-clés, la longueur de l'e-mail et d'autres éléments pertinents.
 
 Seuil de décision : En règle générale, un seuil de 0,5 est fixé pour déterminer à quelle classe une observation appartient. Si la probabilité estimée dépasse 0,5, l'observation est classée dans la classe positive (par exemple, spam). Dans le cas contraire, elle est considérée comme appartenant à la classe négative (non-spam).
+
 Avantage :
+
 Méthode simple et facile à utiliser. Elle est efficace pour des ensembles de données de taille modérée et est souvent utilisée comme méthode de référence pour les problèmes de classification.
 
 
