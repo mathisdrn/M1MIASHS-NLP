@@ -83,6 +83,9 @@ flowchart LR
     style B fill:#d1c4e9,stroke:#8e44ad,stroke-width:2px
     style C fill:#b2dfdb,stroke:#16a085,stroke-width:2px
 ```
+
+### text feature extraction 
+
 ### description des modèles
 
 #### Methode de Naïve Bayes
@@ -102,6 +105,9 @@ réduit considérablement la complexité des calculs. Bien que cette hypothèse 
 (les mots dans une phrase ne sont généralement pas totalement indépendants), elle se révèle efficace dans 
 la plupart des cas de classification de texte. En effet, le modèle évalue les probabilités individuelles de chaque mot, 
 puis combine ces informations pour déterminer la probabilité globale que le texte appartienne à une catégorie.
+
+Seuil de décision : En règle générale, un seuil de 0,5 est fixé pour déterminer à quelle classe une observation appartient. Si la probabilité estimée dépasse 0,5, l'observation est classée dans la classe positive (par exemple, spam). Dans le cas contraire, elle est considérée comme appartenant à la classe négative (non-spam).
+
 
 Avantages :
 Rapide et simple à mettre en œuvre.
@@ -143,6 +149,10 @@ L'algorithme SVM suit trois étapes principales
 Déterminer l'hyperplan optimal en maximisant la marge entre les classes.
 Utiliser les vecteurs de support, qui sont les points d'entraînement définissant la marge et influençant l'hyperplan.
 Classer les nouvelles observations en fonction de leur position par rapport à cet hyperplan.
+
+Seuil de décision : En règle générale, un seuil de 0,5 est fixé pour déterminer à quelle classe une observation appartient. Si la probabilité estimée dépasse 0,5, l'observation est classée dans la classe positive (par exemple, spam). Dans le cas contraire, elle est considérée comme appartenant à la classe négative (non-spam).
+
+
 Avantage :
 Efficace avec un petit nombre de vecteurs de support, ce qui le rend économe en mémoire.
 
