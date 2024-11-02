@@ -161,6 +161,20 @@ Très lent pour des ensembles de données complexes.
 La précision (accuracy) répond à la question : de toutes les prédictions positives, combien sont correctement classifiées ?
 Le rappel (recall) répond à la question : de tous les cas positifs, combien sont actuellement correctement classifiés ?   
 
+### Definition des termes : 
+
+Précision : est une mesure utilisée pour indiquer la proportion de prédictions positives qui sont correctes. Une haute précision signifie que lorsque le modèle prédit un élément comme positif, il y a de grandes chances qu'il ait raison.
+
+Recall (rappel) : est une mesure d'évaluation employée dans les modèles de classification pour évaluer la capacité d'un modèle à détecter correctement tous les cas positifs. Autrement dit, elle mesure la proportion des éléments réellement positifs qui ont été identifiés correctement par le modèle.
+
+F1-score : est une mesure d'évaluation qui combine à la fois la précision et le rappel pour donner une indication unique de la performance d'un modèle de classification. Plus il est proche de 1, meilleure est la précision et le rappel.
+
+Precision-Recall curve : est une courbe qui permet d'analyser la relation entre la précision et le rappel. Elle est particulièrement utilisée pour évaluer des modèles de classification binaire. Nous utilisons différents seuils pour évaluer la précision et le rappel. Un modèle idéal afficherait une courbe qui reste élevée et proche de 1 pour la précision et le rappel sur toute la plage des valeurs de rappel, indiquant qu'il maintient une précision élevée tout en capturant presque tous les vrais positifs.
+
+Courbe ROC (Receiver Operating Characteristic) : La courbe ROC permet d'évaluer la performance d'un classificateur binaire, c’est-à-dire un système conçu pour diviser des éléments en deux catégories distinctes en fonction de certaines caractéristiques. Cette mesure est généralement illustrée par une courbe qui affiche le taux de vrais positifs (proportion des cas positifs correctement détectés) en fonction du taux de faux positifs (proportion des cas négatifs incorrectement identifiés comme positifs). Elle s'interprète avec l'aire sous la courbe (AUC) : plus la valeur est proche de 1, plus le modèle est performant pour déterminer les classes positives et négatives. On peut interpréter le modèle par des points ; par exemple, si le point est en (0,0), il n'y a ni vrais positifs ni faux positifs. Le point en (1,1) signifie que le modèle détecte tous les positifs ainsi que tous les négatifs comme positifs, et enfin, un autre point important en (0,1) signifie que tous les positifs ont été détectés et qu'il n'y a aucune erreur.
+
+
+
 ### Naive Bayes
 
 Possibilité de faire référence à une [table](#table_report_bayes1) ou une figure : [](#figure_pr_bayes1)
@@ -169,16 +183,31 @@ Possibilité de faire référence à une [table](#table_report_bayes1) ou une fi
 :label: table_report_bayes1
 ![](#table_report_bayes)
 :::
+Analyse du tableau.
+Précision : Pour la classe "spam", la précision est de 98,07 %. Cela signifie que sur toutes les prédictions du modèle classées comme spam, 98,07 % étaient effectivement des messages "spam". De même, pour le "ham", où la précision est de 98,57 %, cela indique que la quasi-totalité des messages "ham" analysés étaient corrects.
+
+Recall : Le recall pour la classe "spam" est de 90,62 %, ce qui signifie que sur tous les messages réellement étiquetés comme "spam", le modèle a correctement identifié 90,62 % d'entre eux. En revanche, pour les messages catégorisés comme "ham", le recall est de 99,72 %, ce qui démontre une très bonne capacité à détecter les messages "ham".
+
+F1-score : Pour le "spam", il est de 94,10 %, tandis que pour le "ham", il est de 99,14 %. Cela montre que le modèle est plus efficace pour détecter les messages étiquetés comme "ham".
 
 :::{figure} #figure_pr_bayes
 :label: figure_pr_bayes1
 Precision-Recall Curve of Naive Bayes model
 :::
 
+
+On peut observer sur ce graphique que la courbe bleue (la précision) reste toujours à un niveau de score quasiment proche de 1, tandis que pour la courbe verte (le recall), on constate qu'à mesure que le seuil augmente, le score de recall diminue. Cela signifie que plus le score est élevé, plus la probabilité de détecter un message comme spam diminue, même si la précision demeure satisfaisante.
+
 :::{figure} #figure_roc_bayes
 :label: figure_roc_bayes1
 ROC Curve of Naive Bayes model
 :::
+
+On constate que l'aire sous la courbe est de 0,99, ce qui est très proche de 1, ce qui indique que le modèle est excellent pour identifier les messages "spam" par rapport aux messages "ham". La courbe montre également une forte sensibilité et une faible probabilité de faux positifs, car elle se trouve dès le départ dans l'extrême coin supérieur gauche.
+
+Pour conclure, nous pouvons constater que le modèle de Naive Bayes a montré de très bonnes performances pour classer les messages en "spam" et "ham", avec un rappel et une précision élevés, surtout pour la classe "ham". Cela peut également s'expliquer par le fait qu'il y a moins de messages à classer.
+
+
 
 ### Logistic regression
 
