@@ -49,6 +49,9 @@ Expliquer les risques lorsque les classes du jeu d'entraînement sont trop dispr
 - l'évaluation d'un modèle de classification binaire est biaisé car la classification de la classe minoritaire est sous représenté, etc.
 
 Présenter les techniques permettant d'améliorer l'entraînement d'un modèle avec des classes disproportionés : technique de resampling (SMOTE), paramètre de poids des classes dans la regression logistique et SVC (class weight = 'balanced' (voir doc)), ajustement du seuil en sortie de modèle
+
+Seuil de décision : C'est un chiffre compris entre 0 et 1, mais en général nous utilisons un seuil 0.5, de manière à ajuster le risque de première et seconde espèce à celui désiré.
+
 ## Les modèles
 
 ### Preprocessing 
@@ -106,13 +109,10 @@ réduit considérablement la complexité des calculs. Bien que cette hypothèse 
 la plupart des cas de classification de texte. En effet, le modèle évalue les probabilités individuelles de chaque mot, 
 puis combine ces informations pour déterminer la probabilité globale que le texte appartienne à une catégorie.
 
-Seuil de décision : En règle générale, un seuil de 0,5 est fixé pour déterminer à quelle classe une observation appartient. Si la probabilité estimée dépasse 0,5, l'observation est classée dans la classe positive (par exemple, spam). Dans le cas contraire, elle est considérée comme appartenant à la classe négative (non-spam).
-
-
 Avantages :
 Rapide et simple à mettre en œuvre.
-Inconvénient :
 
+Inconvénient :
 Difficile à utiliser sur des données complexes.
 
 #### Méthode de Logreg
@@ -124,8 +124,6 @@ Fonctionnement de la méthode :
 La régression logistique utilise une fonction logistique pour transformer une combinaison linéaire de variables prédictives en une probabilité comprise entre 0 et 1.
 
 Modèle : Le modèle évalue une probabilité en se basant sur plusieurs variables d'entrée. Par exemple, pour déterminer si un e-mail est un spam, il peut prendre en compte des caractéristiques telles que le nombre de mots-clés, la longueur de l'e-mail et d'autres éléments pertinents.
-
-Seuil de décision : En règle générale, un seuil de 0,5 est fixé pour déterminer à quelle classe une observation appartient. Si la probabilité estimée dépasse 0,5, l'observation est classée dans la classe positive (par exemple, spam). Dans le cas contraire, elle est considérée comme appartenant à la classe négative (non-spam).
 
 Avantage :
 
@@ -149,8 +147,6 @@ L'algorithme SVM suit trois étapes principales
 Déterminer l'hyperplan optimal en maximisant la marge entre les classes.
 Utiliser les vecteurs de support, qui sont les points d'entraînement définissant la marge et influençant l'hyperplan.
 Classer les nouvelles observations en fonction de leur position par rapport à cet hyperplan.
-
-Seuil de décision : En règle générale, un seuil de 0,5 est fixé pour déterminer à quelle classe une observation appartient. Si la probabilité estimée dépasse 0,5, l'observation est classée dans la classe positive (par exemple, spam). Dans le cas contraire, elle est considérée comme appartenant à la classe négative (non-spam).
 
 
 Avantage :
