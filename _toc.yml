@@ -18,4 +18,4 @@
 format: jb-book
 root: PROJET.md
 chapters:
-  - file: ./src/00 - EDA
+  - file: ./src/main
