@@ -67,9 +67,9 @@ Les étapes de Preprocessing sont :
 ### 
 
 ```{mermaid}
-
 flowchart LR
-    A[(Labeled data)] --> B[CountVectorizer]
+    A[(Labeled data)] --> G[Unescape HTML]
+    G --> B[CountVectorizer]
     B --> C[TfidfTransformer]
     
     subgraph Models
@@ -83,6 +83,7 @@ flowchart LR
     C --> F
 
     style A fill:#ffecb3,stroke:#f39c12,stroke-width:2px
+    style G fill:#f7cac9,stroke:#c0392b,stroke-width:2px
     style B fill:#d1c4e9,stroke:#8e44ad,stroke-width:2px
     style C fill:#b2dfdb,stroke:#16a085,stroke-width:2px
 ```
