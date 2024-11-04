@@ -13,21 +13,25 @@ Dans ce projet recherche nous avons choisi de ...
 
 ## Introduction 
 
-Aujourd'hui, les gens utilisent des services de messagerie électronique tels que Gmail, Outlook, AOL Mail, etc. pour communiquer entre eux le plus rapidement possible afin d'envoyer des informations et des lettres officielles. Le courrier indésirable ou le spam est un défi majeur pour ce type de communication, souvent envoyé par des botnets dans le but de faire de la publicité, de nuire et de voler des informations en masse à différentes personnes. Recevoir quotidiennement des courriels indésirables remplit la boîte de réception. Par conséquent, la détection du spam est un défi fondamental, jusqu'à présent, de nombreux travaux ont été réalisés pour détecter le spam en utilisant des méthodes de regroupement et de catégorisation de texte. Dans ce projet, nous utilisons les bibliothèques de traitement du langage naturel spaCy et NLTK ainsi que 3 algorithmes d'apprentissage automatique : le Naive Bayes (NB) en langage de programmation Python pour détecter les courriels indésirables collectés à partir d'un ensemble de données Kaggle. Les observations montrent un taux de précision de 96% pour l'algorithme Naive Bayes dans la détection du spam.
+Aujourd'hui, les gens utilisent des services de messagerie électronique tels que Gmail, Outlook, etc. pour communiquer entre eux le plus rapidement possible afin d'envoyer des informations et des lettres officielles. Le courrier indésirable ou le spam est un défi majeur pour ce type de communication, souvent envoyé par des botnets dans le but de faire de la publicité, de nuire et de voler des informations en masse à différentes personnes. Recevoir quotidiennement des courriels indésirables remplit la boîte de réception. Par conséquent, la détection du spam est un défi fondamental, jusqu'à présent, de nombreux travaux ont été réalisés pour détecter le spam en utilisant des méthodes de regroupement et de catégorisation de texte. Dans ce projet, nous utilisons les bibliothèques de traitement du langage naturel spaCy et NLTK ainsi que 3 algorithmes d'apprentissage automatique (algorithme de Bayes naïf, la régression logistique et SVM) avec Python afin d'entraîner un classifieur binaire à détecter les courriels indésirables sur un ensemble de données disponible sur Kaggle.
 
-Ham : C'est un terme utilisé pour décrire les emails qui sont authentiques et qui ne sont pas considérés comme du spam. Les emails de type "ham" sont ceux que les utilisateurs veulent recevoir, comme des correspondances personnelles, des newsletters auxquelles ils se sont abonnés, etc.
+Le terme **ham** est utilisé pour décrire les emails qui sont authentiques et qui ne sont pas considérés comme du spam. Les emails de type "ham" sont ceux que les utilisateurs veulent recevoir, comme des correspondances personnelles, des newsletters auxquelles ils se sont abonnés, etc.
 
-Spam : Ce terme est utilisé pour décrire les emails indésirables, souvent envoyés en masse à une grande quantité de destinataires sans leur consentement. Le spam peut inclure des publicités non sollicitées, des offres frauduleuses, ou même des emails contenant des logiciels malveillants.
+Le terme **spam** désigne quant à lui les emails indésirables, souvent envoyés en masse à une grande quantité de destinataires sans leur consentement. Le spam peut inclure des publicités non sollicitées, des offres frauduleuses, ou même des emails contenant des logiciels malveillants.
 
 ## Source des données
 
 Les données sont issues d'un jeu de données disponible sur [Kaggle](https://www.kaggle.com/datasets/rajnathpatel/multilingual-spam-data/).
+
+Décrire les données disponibles
 
 :::{table} Extrait du jeu de donnée original
 :label: table_original_data_head1
 :align: center
 ![](#table_original_data_head)
 :::
+
+Le jeu de données est filtré afin de ne considérer que les mails écrit en Français. 
 
 :::{table} Extrait du jeu de donnée d'intérêt
 :label: table_data_head1
@@ -36,63 +40,54 @@ Les données sont issues d'un jeu de données disponible sur [Kaggle](https://ww
 :::
 
 ## Bases théoriques
-### Différence de proportion des classes 
-Description des bases du CountVectorizer et du TdifTransformer
 
-Définir risque première espèce et risque seconde espèce
-Définition de risque premier 
+### Classification binaire
 
-Présenter le trade-off entre les deux
+Le modèle prédit {0, 1} (ici spam ou ham).
+Les valeurs réelles sont dans {0, 1}.
 
-Expliquer les risques lorsque les classes du jeu d'entraînement sont trop disproportionné :
-- le modèle n'apprend pas suffisamment à distinguer la classe minoritaire
-- l'évaluation d'un modèle de classification binaire est biaisé car la classification de la classe minoritaire est sous représenté, etc.
-
-Présenter les techniques permettant d'améliorer l'entraînement d'un modèle avec des classes disproportionés : technique de resampling (SMOTE), paramètre de poids des classes dans la regression logistique et SVC (class weight = 'balanced' (voir doc)), ajustement du seuil en sortie de modèle
+La matrice de confusion est une matrice 2x2 qui permet de visualiser les performances d'un algorithme de classification. Elle contient quatre éléments : les vrais positifs (TP), les faux positifs (FP), les vrais négatifs (TN) et les faux négatifs (FN). Ces éléments sont utilisés pour calculer des métriques telles que la précision, le rappel et le score F1.
 
 Seuil de décision : C'est un chiffre compris entre 0 et 1, mais en général nous utilisons un seuil 0.5, de manière à ajuster le risque de première et seconde espèce à celui désiré.
 
+Expliquer l'ajustement possible du seuil de décision afin d'arbitrer entre les taux de faux positifs et vrai négatif. Expliquer pourquoi cela peut être important (par exemple, dans le cas de la détection de maladies, il est préférable de privilégier un taux de faux positifs élevé pour éviter de passer à côté de cas positifs).
+
+Expliquer les problèmatiques liées aux classes déséquilibrées :
+- moins de données d'apprentissage pour certaines classe -> - le modèle n'apprend pas suffisamment à distinguer la classe minoritaire
+- la précision est biaisée car la classe majoritaire (ham) est sureprésentée
+Mention des techniques de rééquilibrage des classes (sous-échantillonnage, sur-échantillonnage, SMOTE)
+
+### Prétraitement des données
+
+#### Nettoyage des données
+
+- unescape HTML
+- retrait des mots d'arrêts
+
+#### Tokenisation 
+
+Processus de transformations des textes en token (unité linguistique)
+
+#### Vectorisation des textes
+
+Description des bases du CountVectorizer
+
+#### Stemming / Lemmatisation
+
+Description des bases du stemming et de la lemmatisation
+
+#### Utilisation de la fréquences des mots pour normaliser les données
+
+Description du TdifTransformer
+
+:::{warning}
+À contrario des étapes précedentes, cette étape nécessite un corpus de données de manière à calculer les fréquences des mots. Cette étape est donc réalisée après la séparation des données en jeu d'entrainement et de test afin d'éviter les fuites de données entre les deux jeux de données.
+:::
+
 ## Les modèles
 
-### Preprocessing 
+### Méthode de Bayes naïve
 
-Les étapes de Preprocessing sont :
-- Le nettoyage de données : conversion des majuscules en minuscules pour harmoniser le texte. Il peut y avoir aussi par exemple la suppresion des ponctuations.
-- Etapes normalisation du texte
-    - Tokenisation : division du texte en unités linguistiques, appelés tokens. Cela permet de transformer le texte en sous-parties ou en séquence de mots
-    - Stops words : signifie suprimmer des mots très fréquents dans le texte qui ne sont souvent pas pertinents pour l'analyse
-    - Stemming : Tronque les mots à leur racine, sans prendre en compte leur contexte
-- La dernière étape consiste à transformer les textes en valeurs numérique en utilisant par exemple la commande TdifTransformer.
-
-### 
-
-```{mermaid}
-flowchart LR
-    A[(Labeled data)] --> G[Unescape HTML]
-    G --> B[CountVectorizer]
-    B --> C[TfidfTransformer]
-    
-    subgraph Models
-        D([Naive Bayes])
-        E([SVC])
-        F([Logistic Regression])
-    end
-    
-    C --> D
-    C --> E
-    C --> F
-
-    style A fill:#ffecb3,stroke:#f39c12,stroke-width:2px
-    style G fill:#f7cac9,stroke:#c0392b,stroke-width:2px
-    style B fill:#d1c4e9,stroke:#8e44ad,stroke-width:2px
-    style C fill:#b2dfdb,stroke:#16a085,stroke-width:2px
-```
-
-### text feature extraction 
-
-### description des modèles
-
-#### Methode de Naïve Bayes
 Le classificateur de Naïve Bayes est un algorithme de machine learning supervisé. Il est utilisé comme méthode de 
 classification basée sur le théorème de Bayes. Il repose sur une hypothèse simplificatrice selon laquelle chaque 
 caractéristique fonctionne indépendamment des autres, ce qui rend les calculs plus rapides.
@@ -116,7 +111,7 @@ Rapide et simple à mettre en œuvre.
 Inconvénient :
 Difficile à utiliser sur des données complexes.
 
-#### Méthode de Logreg
+### Régression logistique
 
 La régression logistique est une méthode de machine learning. Elle s'appuie sur un modèle statistique permettant de prédire la probabilité qu'un événement se produise. Elle est également largement utilisée comme méthode de classification pour déterminer si une observation appartient à une classe ou à une autre.
 
@@ -130,13 +125,12 @@ Avantage :
 
 Méthode simple et facile à utiliser. Elle est efficace pour des ensembles de données de taille modérée et est souvent utilisée comme méthode de référence pour les problèmes de classification.
 
-
 Inconvénient :
 Peut être moins performante que d'autres algorithmes sur des données complexes.
 
-#### Support vector Clustering
+### Support-vector classification
 
-Le Support Vector Clustering est une méthode de classification largement utilisée en machine learning. Elle permet de regrouper des données en trouvant la meilleure séparation possible entre différentes catégories.
+Le Support Vector Classification (SVC) est une méthode de classification largement utilisée en machine learning. Elle permet de regrouper des données en trouvant la meilleure séparation possible entre différentes catégories.
 
 
 Principe de l'algorithme :
@@ -149,13 +143,36 @@ Déterminer l'hyperplan optimal en maximisant la marge entre les classes.
 Utiliser les vecteurs de support, qui sont les points d'entraînement définissant la marge et influençant l'hyperplan.
 Classer les nouvelles observations en fonction de leur position par rapport à cet hyperplan.
 
-
 Avantage :
 Efficace avec un petit nombre de vecteurs de support, ce qui le rend économe en mémoire.
 
 Inconvénient :
 Très lent pour des ensembles de données complexes.
 
+### Vue du modèle complet
+
+
+```{mermaid}
+flowchart LR
+    A[(Labeled data)] --> G[Unescape HTML]
+    G --> B[CountVectorizer]
+    B --> C[TfidfTransformer]
+    
+    subgraph Models
+        D([Naive Bayes])
+        E([SVC])
+        F([Logistic Regression])
+    end
+    
+    C --> D
+    C --> E
+    C --> F
+
+    style A fill:#ffecb3,stroke:#f39c12,stroke-width:2px
+    style G fill:#f7cac9,stroke:#c0392b,stroke-width:2px
+    style B fill:#d1c4e9,stroke:#8e44ad,stroke-width:2px
+    style C fill:#b2dfdb,stroke:#16a085,stroke-width:2px
+```
 
 ## Les résultats des modèles
 
@@ -174,8 +191,6 @@ Precision-Recall curve : est une courbe qui permet d'analyser la relation entre 
 
 Courbe ROC (Receiver Operating Characteristic) : La courbe ROC permet d'évaluer la performance d'un classificateur binaire, c’est-à-dire un système conçu pour diviser des éléments en deux catégories distinctes en fonction de certaines caractéristiques. Cette mesure est généralement illustrée par une courbe qui affiche le taux de vrais positifs (proportion des cas positifs correctement détectés) en fonction du taux de faux positifs (proportion des cas négatifs incorrectement identifiés comme positifs). Elle s'interprète avec l'aire sous la courbe (AUC) : plus la valeur est proche de 1, plus le modèle est performant pour déterminer les classes positives et négatives. On peut interpréter le modèle par des points ; par exemple, si le point est en (0,0), il n'y a ni vrais positifs ni faux positifs. Le point en (1,1) signifie que le modèle détecte tous les positifs ainsi que tous les négatifs comme positifs, et enfin, un autre point important en (0,1) signifie que tous les positifs ont été détectés et qu'il n'y a aucune erreur.
 
-
-
 ### Naive Bayes
 
 Possibilité de faire référence à une [table](#table_report_bayes1) ou une figure : [](#figure_pr_bayes1)
@@ -184,6 +199,7 @@ Possibilité de faire référence à une [table](#table_report_bayes1) ou une fi
 :label: table_report_bayes1
 ![](#table_report_bayes)
 :::
+
 Analyse du tableau.
 Précision : Pour la classe "spam", la précision est de 98,07 %. Cela signifie que sur toutes les prédictions du modèle classées comme spam, 98,07 % étaient effectivement des messages "spam". De même, pour le "ham", où la précision est de 98,57 %, cela indique que la quasi-totalité des messages "ham" analysés étaient corrects.
 
@@ -196,7 +212,6 @@ F1-score : Pour le "spam", il est de 94,10 %, tandis que pour le "ham", il est d
 Precision-Recall Curve of Naive Bayes model
 :::
 
-
 On peut observer sur ce graphique que la courbe bleue (la précision) reste toujours à un niveau de score quasiment proche de 1, tandis que pour la courbe verte (le recall), on constate qu'à mesure que le seuil augmente, le score de recall diminue. Cela signifie que plus le score est élevé, plus la probabilité de détecter un message comme spam diminue, même si la précision demeure satisfaisante.
 
 :::{figure} #figure_roc_bayes
@@ -207,8 +222,6 @@ ROC Curve of Naive Bayes model
 On constate que l'aire sous la courbe est de 0,99, ce qui est très proche de 1, ce qui indique que le modèle est excellent pour identifier les messages "spam" par rapport aux messages "ham". La courbe montre également une forte sensibilité et une faible probabilité de faux positifs, car elle se trouve dès le départ dans l'extrême coin supérieur gauche.
 
 Pour conclure, nous pouvons constater que le modèle de Naive Bayes a montré de très bonnes performances pour classer les messages en "spam" et "ham", avec un rappel et une précision élevés, surtout pour la classe "ham". Cela peut également s'expliquer par le fait qu'il y a moins de messages à classer.
-
-
 
 ### Logistic regression
 
@@ -239,7 +252,6 @@ On constate que l'aire sous la courbe est de 0.99, très proche de 1, ce qui ind
 
 Le modèle de régression logistique est globalement performant, avec une AUC élevée et une bonne précision pour la classe "spam". Cependant, le rappel pour le "spam" est un peu plus faible que celui pour le "ham", ce qui pourrait indiquer une certaine difficulté à identifier tous les spams. On observe également, grâce au graphique de précision-rappel, que le modèle aura davantage de mal à classer correctement un message comme "spam" ou "ham" lorsque le seuil est élevé.
 
-
 ### Support-vector clustering
 
 :::{table} Classification report of Support-vector clustering model
@@ -247,7 +259,6 @@ Le modèle de régression logistique est globalement performant, avec une AUC é
 :align: center
 ![](#table_report_SVC)
 :::
-
 
 Précision : Pour les messages classés comme "spam", la précision est de 100 %, ce qui signifie que tous les messages prédits comme "spam" sont effectivement des spams. Pour la classe "ham", la précision est de 98,37 %, ce qui indique que parmi tous les messages prédits comme "ham", 98,37 % étaient bien classés.
 
