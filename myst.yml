@@ -34,3 +34,5 @@ project:
 site:
   title: "Spam Detection - NLP Project"
   template: article-theme
+  options:
+    outline_maxdepth: 2
