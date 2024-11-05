@@ -72,9 +72,22 @@ Processus de transformations des textes en token (unité linguistique)
 
 Description des bases du CountVectorizer
 
+Le CountVectorizer est une méthode de représentation du texte. Elle fait partie des techniques de transformation en sac de mots (Bag of Words), où chaque texte est représenté par les fréquences d’apparition de ses mots, indépendamment de leur ordre.
+
+L'objectif de cette méthode est de convertir des données textuelles en données numériques en utilisant une matrice de comptage des mots. (Partie à retravailler nottament sur le fonctionnement)
+
 #### Stemming / Lemmatisation
 
 Description des bases du stemming et de la lemmatisation
+
+Le stemming et la lemmatisation sont deux techniques utilisés pour réduire des mots à leur forme de base. Cela aide à simplifier les texte.
+
+Le stemming est une technique de traitement des mots qui consiste à supprimer les suffixes (et parfois les préfixes) pour ne conserver que la racine du mot. Cette méthode n’analyse pas le sens des mots, ce qui peut entraîner des erreurs de syntaxe. Son objectif est de simplifier les mots en réduisant les variations morphologiques, mais sans distinction de sens contextuel.
+
+
+La lemmatisation vise à ramener les mots à leur forme de base, appelée lemme, telle qu’elle apparaît dans le dictionnaire. Contrairement au stemming, la lemmatisation prend en compte la grammaire et le contexte d’usage, permettant d’identifier la forme correcte d’un mot en fonction de son rôle dans la phrase. Elle nécessite donc une compréhension linguistique plus approfondie.
+
+On peut dire que le stemming est plus rapide à utiliser que la lemmatisation mais par contre au niveau de la structure des mots le stemming est beaucoup moins précis.
 
 #### Utilisation de la fréquences des mots pour normaliser les données
 
