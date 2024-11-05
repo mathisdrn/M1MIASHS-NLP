@@ -4,12 +4,7 @@ subject: Natural Language Processing
 short_title: Spam Detection
 banner: ./assets/banner.png
 license: CC-BY-4.0
-keywords: classifier, NLP, spam
 ---
-
-+++ {"part": "abstract"}
-Dans ce projet recherche nous avons choisi de ...
-+++
 
 ## Introduction 
 
