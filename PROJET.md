@@ -98,7 +98,7 @@ L’objectif principal du TF-IDF Transformer est de transformer des données tex
 ## Les modèles
 
 ### Méthode de Bayes naïve
-
+Première version
 Le classificateur de Naïve Bayes est un algorithme de machine learning supervisé. Il est utilisé comme méthode de 
 classification basée sur le théorème de Bayes. Il repose sur une hypothèse simplificatrice selon laquelle chaque 
 caractéristique fonctionne indépendamment des autres, ce qui rend les calculs plus rapides.
@@ -115,6 +115,23 @@ réduit considérablement la complexité des calculs. Bien que cette hypothèse 
 (les mots dans une phrase ne sont généralement pas totalement indépendants), elle se révèle efficace dans 
 la plupart des cas de classification de texte. En effet, le modèle évalue les probabilités individuelles de chaque mot, 
 puis combine ces informations pour déterminer la probabilité globale que le texte appartienne à une catégorie.
+
+Avantages :
+Rapide et simple à mettre en œuvre.
+
+Inconvénient :
+Difficile à utiliser sur des données complexes.
+
+Deuxième Version
+
+Le classificateur de Naïve Bayes est un algorithme de classification supervisé largement utilisé en machine learning. Sa méthode repose sur le théorème de Bayes, appliqué à des problèmes de classification où il est particulièrement efficace, notamment dans le traitement des textes et la détection de spams.
+
+2. Principe de Fonctionnement
+Naïve Bayes applique le théorème de Bayes en supposant que chaque caractéristique est indépendante des autres, une hypothèse simplificatrice connue sous le nom d'indépendance conditionnelle. Cette hypothèse réduit significativement la complexité des calculs, facilitant une exécution rapide de l'algorithme.
+
+Dans les applications de traitement de texte, telles que la détection de spam, l’algorithme estime la probabilité qu'un texte appartienne à une catégorie spécifique en fonction des mots qu'il contient. Chaque mot est traité comme une caractéristique indépendante du texte, et l'algorithme détermine comment les mots sont distribués pour chaque catégorie.
+
+Bien que l’hypothèse d’indépendance entre les mots soit souvent irréaliste (les mots dans un texte sont généralement liés par leur contexte), cette simplification s'avère efficace dans la majorité des cas. Le modèle calcule la probabilité de chaque mot en fonction de la catégorie, puis les combine pour estimer la probabilité globale que le texte appartienne à une catégorie donnée.
 
 Avantages :
 Rapide et simple à mettre en œuvre.
