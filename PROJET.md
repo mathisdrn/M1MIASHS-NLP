@@ -79,7 +79,6 @@ Le stemming et la lemmatisation sont deux techniques utilisés pour réduire des
 
 Le stemming est une technique de traitement des mots qui consiste à supprimer les suffixes (et parfois les préfixes) pour ne conserver que la racine du mot. Cette méthode n’analyse pas le sens des mots, ce qui peut entraîner des erreurs de syntaxe. Son objectif est de simplifier les mots en réduisant les variations morphologiques, mais sans distinction de sens contextuel.
 
-
 La lemmatisation vise à ramener les mots à leur forme de base, appelée lemme, telle qu’elle apparaît dans le dictionnaire. Contrairement au stemming, la lemmatisation prend en compte la grammaire et le contexte d’usage, permettant d’identifier la forme correcte d’un mot en fonction de son rôle dans la phrase. Elle nécessite donc une compréhension linguistique plus approfondie.
 
 On peut dire que le stemming est plus rapide à utiliser que la lemmatisation mais par contre au niveau de la structure des mots le stemming est beaucoup moins précis.
@@ -87,6 +86,10 @@ On peut dire que le stemming est plus rapide à utiliser que la lemmatisation ma
 #### Utilisation de la fréquences des mots pour normaliser les données
 
 Description du TdifTransformer
+
+Le TF-IDF Transformer (Transformateur de Fréquence de Terme-Fréquence Inverse de Document) transforme les matrices de comptage en représentations pondérées, mettant en avant les termes les plus informatifs d'un document tout en réduisant l'impact des mots courants qui apportent peu de distinction au sein du corpus.
+
+L’objectif principal du TF-IDF Transformer est de transformer des données textuelles en données numériques, de manière à mettre en avant les mots les plus importants pour chaque document. Ce procédé est crucial car il rend les données exploitables par les modèles de machine learning, tout en augmentant leur capacité de discrimination entre les documents.
 
 :::{warning}
 À contrario des étapes précedentes, cette étape nécessite un corpus de données de manière à calculer les fréquences des mots. Cette étape est donc réalisée après la séparation des données en jeu d'entrainement et de test afin d'éviter les fuites de données entre les deux jeux de données.
