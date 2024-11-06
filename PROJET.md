@@ -126,7 +126,7 @@ Deuxième Version
 
 Le classificateur de Naïve Bayes est un algorithme de classification supervisé largement utilisé en machine learning. Sa méthode repose sur le théorème de Bayes, appliqué à des problèmes de classification où il est particulièrement efficace, notamment dans le traitement des textes et la détection de spams.
 
-2. Principe de Fonctionnement
+Principe de Fonctionnement
 Naïve Bayes applique le théorème de Bayes en supposant que chaque caractéristique est indépendante des autres, une hypothèse simplificatrice connue sous le nom d'indépendance conditionnelle. Cette hypothèse réduit significativement la complexité des calculs, facilitant une exécution rapide de l'algorithme.
 
 Dans les applications de traitement de texte, telles que la détection de spam, l’algorithme estime la probabilité qu'un texte appartienne à une catégorie spécifique en fonction des mots qu'il contient. Chaque mot est traité comme une caractéristique indépendante du texte, et l'algorithme détermine comment les mots sont distribués pour chaque catégorie.
