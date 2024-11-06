@@ -98,31 +98,6 @@ L’objectif principal du TF-IDF Transformer est de transformer des données tex
 ## Les modèles
 
 ### Méthode de Bayes naïve
-Première version
-Le classificateur de Naïve Bayes est un algorithme de machine learning supervisé. Il est utilisé comme méthode de 
-classification basée sur le théorème de Bayes. Il repose sur une hypothèse simplificatrice selon laquelle chaque 
-caractéristique fonctionne indépendamment des autres, ce qui rend les calculs plus rapides.
-
-Comment fonctionne la méthode de Bayes :
-
-Pour classifier des textes, comme dans les applications de détection de spam ou de non-spam pour les e-mails, ou pour la 
-catégorisation automatique d'articles, Naïve Bayes modélise la probabilité qu'un texte appartienne à une catégorie spécifique en se 
-basant sur les mots qu'il contient. Chaque mot (ou groupe de mots) est considéré comme une caractéristique du texte, et l'algorithme 
-estime comment ces mots se distribuent en fonction des différentes catégories à classifier.
-
-Dans Naïve Bayes, l’hypothèse fondamentale est que chaque mot est indépendant des autres. Cette simplification 
-réduit considérablement la complexité des calculs. Bien que cette hypothèse soit souvent irréaliste 
-(les mots dans une phrase ne sont généralement pas totalement indépendants), elle se révèle efficace dans 
-la plupart des cas de classification de texte. En effet, le modèle évalue les probabilités individuelles de chaque mot, 
-puis combine ces informations pour déterminer la probabilité globale que le texte appartienne à une catégorie.
-
-Avantages :
-Rapide et simple à mettre en œuvre.
-
-Inconvénient :
-Difficile à utiliser sur des données complexes.
-
-Deuxième Version
 
 Le classificateur de Naïve Bayes est un algorithme de classification supervisé largement utilisé en machine learning. Sa méthode repose sur le théorème de Bayes, appliqué à des problèmes de classification où il est particulièrement efficace, notamment dans le traitement des textes et la détection de spams.
 
@@ -141,13 +116,15 @@ Difficile à utiliser sur des données complexes.
 
 ### Régression logistique
 
-La régression logistique est une méthode de machine learning. Elle s'appuie sur un modèle statistique permettant de prédire la probabilité qu'un événement se produise. Elle est également largement utilisée comme méthode de classification pour déterminer si une observation appartient à une classe ou à une autre.
+La régression logistique est un modèle statistique de machine learning couramment utilisé pour prédire la probabilité qu’un événement se produise, notamment dans les problèmes de classification binaire. Elle permet de déterminer si une observation appartient à une classe ou à une autre, en estimant la probabilité d'appartenance à chaque catégorie.
 
+2. Principe de Fonctionnement
+La régression logistique transforme une combinaison linéaire de variables prédictives en une probabilité située entre 0 et 1, grâce à la fonction logistique (ou sigmoïde). Ce procédé permet de modéliser la probabilité qu’une observation appartienne à une classe donnée.
+
+Exemple d'application :
+Dans la détection de spam, le modèle de régression logistique peut utiliser des variables telles que le nombre de mots-clés ou la longueur de l’e-mail pour estimer la probabilité qu’un e-mail soit un spam.
 Fonctionnement de la méthode :
 
-La régression logistique utilise une fonction logistique pour transformer une combinaison linéaire de variables prédictives en une probabilité comprise entre 0 et 1.
-
-Modèle : Le modèle évalue une probabilité en se basant sur plusieurs variables d'entrée. Par exemple, pour déterminer si un e-mail est un spam, il peut prendre en compte des caractéristiques telles que le nombre de mots-clés, la longueur de l'e-mail et d'autres éléments pertinents.
 
 Avantage :
 
@@ -158,14 +135,12 @@ Peut être moins performante que d'autres algorithmes sur des données complexes
 
 ### Support-vector classification
 
-Le Support Vector Classification (SVC) est une méthode de classification largement utilisée en machine learning. Elle permet de regrouper des données en trouvant la meilleure séparation possible entre différentes catégories.
+Le Support Vector Classification (SVC) est une méthode de machine learning supervisée utilisée pour classer des données en fonction de catégories. Sa force réside dans sa capacité à trouver une séparation optimale entre différentes classes, ce qui permet de généraliser efficacement les classifications pour de nouvelles données.
 
+Principe de Fonctionnement
+Les SVM (Support Vector Machines) recherchent l’hyperplan qui maximise la marge de séparation entre les catégories de données. Cet hyperplan est défini de manière à maximiser la distance entre les points de données les plus proches de chaque côté de la frontière. Ces points spécifiques, appelés vecteurs de support, jouent un rôle crucial dans la définition de l’hyperplan et influencent directement la marge de séparation. Cette large marge améliore la capacité de généralisation du modèle, permettant de mieux classer des données non vues.
 
-Principe de l'algorithme :
-Les SVM (Support Vector Machines) identifient la séparation optimale entre les différentes catégories de données. Cette séparation est représentée par un hyperplan qui maximise la distance entre les points de données les plus proches de chaque côté. Ces points, appelés vecteurs de support, sont essentiels pour définir cette marge. En augmentant cette marge, le modèle est mieux équipé pour classer correctement de nouvelles données, améliorant ainsi sa capacité de généralisation.
-
-Fonctionnement de la méthode :
-L'algorithme SVM suit trois étapes principales 
+Étapes principales de l'algorithme :
 
 Déterminer l'hyperplan optimal en maximisant la marge entre les classes.
 Utiliser les vecteurs de support, qui sont les points d'entraînement définissant la marge et influençant l'hyperplan.
