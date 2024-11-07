@@ -118,7 +118,7 @@ Difficile à utiliser sur des données complexes.
 
 La régression logistique est un modèle statistique de machine learning couramment utilisé pour prédire la probabilité qu’un événement se produise, notamment dans les problèmes de classification binaire. Elle permet de déterminer si une observation appartient à une classe ou à une autre, en estimant la probabilité d'appartenance à chaque catégorie.
 
-2. Principe de Fonctionnement
+Principe de Fonctionnement
 La régression logistique transforme une combinaison linéaire de variables prédictives en une probabilité située entre 0 et 1, grâce à la fonction logistique (ou sigmoïde). Ce procédé permet de modéliser la probabilité qu’une observation appartienne à une classe donnée.
 
 Exemple d'application :
