@@ -101,56 +101,43 @@ L’objectif principal du TF-IDF Transformer est de transformer des données tex
 
 Le classificateur de Naïve Bayes est un algorithme de classification supervisé largement utilisé en machine learning. Sa méthode repose sur le théorème de Bayes, appliqué à des problèmes de classification où il est particulièrement efficace, notamment dans le traitement des textes et la détection de spams.
 
-Principe de Fonctionnement
-Naïve Bayes applique le théorème de Bayes en supposant que chaque caractéristique est indépendante des autres, une hypothèse simplificatrice connue sous le nom d'indépendance conditionnelle. Cette hypothèse réduit significativement la complexité des calculs, facilitant une exécution rapide de l'algorithme.
-
-Dans les applications de traitement de texte, telles que la détection de spam, l’algorithme estime la probabilité qu'un texte appartienne à une catégorie spécifique en fonction des mots qu'il contient. Chaque mot est traité comme une caractéristique indépendante du texte, et l'algorithme détermine comment les mots sont distribués pour chaque catégorie.
-
-Bien que l’hypothèse d’indépendance entre les mots soit souvent irréaliste (les mots dans un texte sont généralement liés par leur contexte), cette simplification s'avère efficace dans la majorité des cas. Le modèle calcule la probabilité de chaque mot en fonction de la catégorie, puis les combine pour estimer la probabilité globale que le texte appartienne à une catégorie donnée.
+La méthode Bayes naïve est un algorithme d'apprentissage supervisé utilisé principalement pour des problèmes de classification binaire (ou multiclasse). Elle repose sur le théorème de Bayes, qui permet de calculer la probabilité qu'une observation appartienne à une classe donnée, en tenant compte de ses caractéristiques. Le terme "naïve" provient de l'hypothèse simplificatrice selon laquelle toutes les caractéristiques sont conditionnellement indépendantes les unes des autres, ce qui n'est généralement pas le cas dans la réalité. Par exemple, les mots dans un texte sont souvent liés par leur contexte, mais l'algorithme de Bayes naïf traite chaque mot comme une caractéristique indépendante. Ainsi, le modèle calcule la probabilité de chaque mot en fonction de la catégorie, puis les combine pour estimer la probabilité globale que le texte appartienne à une catégorie donnée.
 
 Avantages :
-Rapide et simple à mettre en œuvre.
+- Très rapide et efficace même avec de grands ensembles de données.
+- Fonctionne bien avec des variables catégorielles et pour des problèmes de filtrage de texte, comme la détection de spam.
+- Facile à interpréter et à mettre en œuvre.
 
-Inconvénient :
-Difficile à utiliser sur des données complexes.
+Inconvénients :
+- L'hypothèse d'indépendance entre les caractéristiques est souvent irréaliste, ce qui peut réduire les performances.
+- Peut ne pas être adapté aux situations où les relations entre les caractéristiques sont importantes.
+- Sensible à des échantillons de données avec de faibles fréquences de certaines catégories, nécessitant parfois un lissage pour améliorer la robustesse.
 
 ### Régression logistique
 
-La régression logistique est un modèle statistique de machine learning couramment utilisé pour prédire la probabilité qu’un événement se produise, notamment dans les problèmes de classification binaire. Elle permet de déterminer si une observation appartient à une classe ou à une autre, en estimant la probabilité d'appartenance à chaque catégorie.
+La régression logistique est une méthode d'apprentissage supervisé largement utilisée pour la classification binaire. Elle modélise la probabilité qu'une observation appartienne à une des deux classes en utilisant une fonction logistique (ou sigmoïde) pour transformer une combinaison linéaire des caractéristiques en une probabilité. La fonction sigmoïde prend une valeur comprise entre 0 et 1, ce qui permet de prédire l'appartenance à une classe en appliquant un seuil, généralement 0,5. L'objectif de l'algorithme est d'ajuster les coefficients de la combinaison linéaire en maximisant la vraisemblance des observations données.
 
-Principe de Fonctionnement
-La régression logistique transforme une combinaison linéaire de variables prédictives en une probabilité située entre 0 et 1, grâce à la fonction logistique (ou sigmoïde). Ce procédé permet de modéliser la probabilité qu’une observation appartienne à une classe donnée.
+Avantages :
+- Facile à interpréter grâce aux coefficients qui indiquent l'influence des variables explicatives.
+- Efficace pour des problèmes de classification linéairement séparables.
+- Performant même lorsque les classes sont partiellement chevauchées, tant que la relation est linéaire.
 
-Exemple d'application :
-Dans la détection de spam, le modèle de régression logistique peut utiliser des variables telles que le nombre de mots-clés ou la longueur de l’e-mail pour estimer la probabilité qu’un e-mail soit un spam.
-Fonctionnement de la méthode :
-
-
-Avantage :
-
-Méthode simple et facile à utiliser. Elle est efficace pour des ensembles de données de taille modérée et est souvent utilisée comme méthode de référence pour les problèmes de classification.
-
-Inconvénient :
-Peut être moins performante que d'autres algorithmes sur des données complexes.
+Inconvénients :
+- Ne fonctionne pas bien lorsque la relation entre les variables explicatives et la probabilité d'appartenance à une classe est non linéaire.
+- Peut être sensible aux valeurs aberrantes, nécessitant un nettoyage préalable des données.
+- Peut nécessiter une régularisation (comme la pénalisation L1 ou L2) pour éviter le surajustement dans le cas de nombreuses variables explicatives.
 
 ### Support-vector classification
 
-Le Support Vector Classification (SVC) est une méthode de machine learning supervisée utilisée pour classer des données en fonction de catégories. Sa force réside dans sa capacité à trouver une séparation optimale entre différentes classes, ce qui permet de généraliser efficacement les classifications pour de nouvelles données.
+L'algorithme Support Vector Classification (SVC) est une méthode d'apprentissage supervisé utilisée pour résoudre des problèmes de classification binaire. Il repose sur le concept des marges maximales, c'est-à-dire qu'il cherche à séparer deux classes dans l'espace des caractéristiques en traçant un hyperplan qui maximise la distance (ou la marge) entre les points de chaque classe les plus proches de cette hyperplan, appelés vecteurs de support. Lorsque les classes ne sont pas linéairement séparables, l'algorithme utilise des noyaux pour projeter les données dans un espace de dimension supérieure où elles peuvent être séparées.
 
-Principe de Fonctionnement
-Les SVM (Support Vector Machines) recherchent l’hyperplan qui maximise la marge de séparation entre les catégories de données. Cet hyperplan est défini de manière à maximiser la distance entre les points de données les plus proches de chaque côté de la frontière. Ces points spécifiques, appelés vecteurs de support, jouent un rôle crucial dans la définition de l’hyperplan et influencent directement la marge de séparation. Cette large marge améliore la capacité de généralisation du modèle, permettant de mieux classer des données non vues.
-
-Étapes principales de l'algorithme :
-
-Déterminer l'hyperplan optimal en maximisant la marge entre les classes.
-Utiliser les vecteurs de support, qui sont les points d'entraînement définissant la marge et influençant l'hyperplan.
-Classer les nouvelles observations en fonction de leur position par rapport à cet hyperplan.
-
-Avantage :
-Efficace avec un petit nombre de vecteurs de support, ce qui le rend économe en mémoire.
-
-Inconvénient :
-Très lent pour des ensembles de données complexes.
+Avantages :
+- Efficace dans des espaces de grande dimension.
+- Peut être modifié pour des cas non linéaires grâce aux fonctions noyau.
+- Utilise seulement les vecteurs de support, ce qui le rend plus économe en mémoire.
+Inconvénients :
+- Peut être sensible aux choix des paramètres (comme C et le type de noyau).
+- Moins performant avec de très grands ensembles de données ou quand les classes sont fortement chevauchées.
 
 ### Vue du modèle complet
 
@@ -233,7 +220,7 @@ La [](#figure_roc_bayes1) présente la courbe ROC pour le modèle de Bayes naïf
 ROC Curve of Naive Bayes model
 :::
 
-Pour conclure, le modèle de Bayes Naïf présente d'excellente performances. Il est capable de distinguer les messages *spam* des messages *ham* avec une grande précision et un bon rappel. La courbe ROC montre une forte sensibilité et une faible probabilité de faux positifs, ce qui indique que le modèle est très performant pour distinguer les deux classes.
+Pour conclure, le modèle de Bayes Naïf présente d'excellentes performances. Il est capable de distinguer les messages *spam* des messages *ham* avec une grande précision et un bon rappel. La courbe ROC montre une forte sensibilité et une faible probabilité de faux positifs, ce qui indique que le modèle est très performant pour distinguer les deux classes.
 
 ### La régression logistique
 
