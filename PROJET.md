@@ -1,9 +1,6 @@
 ---
 title: Spam Classification Model
-subject: Natural Language Processing
 short_title: Spam Detection
-banner: ./assets/banner.png
-license: CC-BY-4.0
 ---
 
 ## Introduction 
@@ -25,10 +22,10 @@ Dans ce projet, nous utilisons les bibliothèques de traitement du langage natur
 ## Source des données
 
 Les données sont issues d'un jeu de données disponible sur [Kaggle](https://www.kaggle.com/datasets/rajnathpatel/multilingual-spam-data/). Il contient $5672$ mails en anglais, français, allemand et Hindi. La langue original semble être l'anglais. Chaque mail a été manuellement annoté :
-- $4825$ mails sont classifiés en *ham*
-- $847$ mails sont classifiés en *spam*
+- $4825$ mails sont classifiés en `ham`
+- $847$ mails sont classifiés en `spam`
 
-*Ham* est utilisé pour décrire les emails qui sont authentiques et qui ne sont pas considérés comme du spam.
+Le mot `ham` est utilisé pour décrire les emails qui sont authentiques et qui ne sont pas considérés comme du spam.
 
 :::{table} Extrait du jeu de donnée original
 :label: table_original_data_head1
@@ -48,7 +45,7 @@ Le jeu de données est filtré afin de ne considérer que les mails écrit en Fr
 
 ### Classification binaire
 
-La classification binaire est un type de problème de machine learning supervisé dans lequel l'objectif est de classer les données en deux catégories distinctes. Chaque exemple dans les données est ainsi étiqueté comme appartenant à l'une des deux classes possibles. Dans le contexte de la détection de spam, notre modèle de classification binaire prédit si un email est un ham (authentique) ou un spam (indésirable), en utilisant les valeurs {0, 1} : 0 pour un ham et 1 pour un spam.
+La classification binaire est un type de problème de machine learning supervisé dans lequel l'objectif est de classer les données en deux catégories distinctes. Chaque exemple dans les données est ainsi étiqueté comme appartenant à l'une des deux classes possibles. Dans le contexte de la détection de spam, notre modèle de classification binaire prédit si un email est un **ham** (authentique) ou un **spam** (indésirable), en utilisant les valeurs `{0, 1}` : `0` pour un **ham** et `1` pour un **spam**.
 
 ### Classes déséquilibrées
 
@@ -59,18 +56,43 @@ Mention des techniques de rééquilibrage des classes (sous-échantillonnage, su
 
 ### Prétraitement des données
 
+Le pré-traitement des données répond à de nombreux objectifs :
+- Nettoyer les données inutiles, redondantes ou même nuisible pour l'entraînement du modèle
+- Transformer les données textuelles en données numériques exploitables par les algorithmes de machine learning. Ici en particulier, les données d'entrées du classifieur doivent être de même dimension.
+- Réduire la dimensionnalité des données pour améliorer les performances des modèles
+- Normaliser les données pour les rendre comparables et cohérentes
+- Équilibrer les classes pour éviter les biais de prédiction
+
+Ces étapes d'entraînement seront appliquées aux données d'entraînement lors de la phase d'entraînement du modèle et aux données de test lors de la phase d'évaluation du modèle.
+
+:::{attention}
+Certaines étapes de pré-traitement utilisent des informations des données fournies pour appliquer des transformations au jeu de données. C'est par exemple le cas lorsque l'on normalise des valeurs numériques : on a besoin de connaître la moyenne et l'écart-type des données pour les normaliser. 
+
+Si on applique ces transformations sur l'ensemble des données (entraînement et test) avant de séparer les données, on risque de biaiser les résultats du modèle car il aura accès à des informations des données de test lors de l'entraînement. Il est donc important de séparer les données en deux jeux distincts : un jeu d'entraînement et un jeu de test. Le jeu d'entraînement est utilisé pour entraîner le modèle, tandis que le jeu de test est utilisé pour évaluer les performances du modèle sur des données non vues.
+:::
+
+Ces étapes de pré-traitement sont réalisées au sein d'une pipeline `scikit-learn` qui permet de chaîner les différentes étapes de traitement des données et de les appliquer de manière cohérente. Et ainsi de réduire le risque de fuites de données entre les jeux d'entraînement et de test.
+
+Ci-dessous sont présentées les différentes étapes de pré-traitement des données textuelles appliquées dans ce projet.
+
 #### Nettoyage des données
 
-Le nettoyage des données textuelles vise à améliorer la lisibilité et la pertinence des textes avant la classification. Voici les principales opérations de nettoyage réalisées :
+Le texte contient des entités HTML. Ceux-ci sont transformés dans leur forme lisible. Par exemple `&eacute;` est transformé en `é`.
 
-- Conversion des entités HTML : Les entités HTML (comme &amp; pour &) sont converties en leurs caractères correspondants, rendant le texte plus lisible et pertinent pour l’analyse.
-- Suppression des mots d'arrêt : Les mots d'arrêt (stop words) sont des mots fréquents mais peu informatifs pour la classification, comme « et », « de », « le ». Leur retrait réduit le volume de données à traiter, en ne conservant que les mots porteurs de sens pour l’analyse.
+La suppression des mots d'arrêt (stop words) élimine les mots fréquents mais peu informatifs pour la classification, tels que « et », « de », « le ». Leur retrait réduit le volume de données à traiter, ne conservant que les mots porteurs de sens pour l’analyse.
 
 #### Tokenisation 
 
 La tokenisation est le processus de division du texte en unités linguistiques appelées tokens (mots individuels, phrases, ou autres). Cette étape est essentielle pour capturer les caractéristiques pertinentes du texte et préparer les données pour la vectorisation et la modélisation.
 
-#### Stemming / Lemmatisation
+```mermaid
+graph TD
+    A["I love biscuits"] --> B["I"]
+    A --> C["love"]
+    A --> D["biscuits"]
+```
+
+#### Stemming et Lemmatisation
 
 Le stemming et la lemmatisation sont deux techniques utilisés pour réduire des mots à leur forme de base. Cela aide à simplifier les texte.
 
@@ -78,29 +100,42 @@ Le stemming est une technique de traitement des mots qui consiste à supprimer l
 
 La lemmatisation vise à ramener les mots à leur forme de base, appelée lemme, telle qu’elle apparaît dans le dictionnaire. Contrairement au stemming, la lemmatisation prend en compte la grammaire et le contexte d’usage, permettant d’identifier la forme correcte d’un mot en fonction de son rôle dans la phrase. Elle nécessite donc une compréhension linguistique plus approfondie.
 
-On peut dire que le stemming est plus rapide à utiliser que la lemmatisation mais par contre au niveau de la structure des mots le stemming est beaucoup moins précis.
+:::{image} ./assets/combined.png
+:alt: Stemming vs Lemmatisation
+:width: 700px
+:::
+
+Le stemming est plus rapide à utiliser que la lemmatisation, mais il est moins précis au niveau de la structure des mots.
 
 #### Vectorisation des textes
 
-La vectorisation consiste à convertir les textes en une représentation numérique vectorielle exploitable par les algorithmes de machine learning. Une des méthodes couramment utilisées est le CountVectorizer, qui repose sur l’approche du sac de mots (Bag of Words).
-
-Description du fonctionnement du CountVectorizer
+La vectorisation consiste à convertir les textes en une représentation numérique vectorielle exploitable par les algorithmes de machine learning. Une des méthodes couramment utilisées consiste à associer à chaque mot un index unique, et à compter le nombre de fois que chaque mot apparaît dans chaque texte. On normalise ensuite ces comptes pour obtenir des vecteurs de fréquences de mots de taille fixe.
 
 #### Utilisation de la fréquences des mots pour normaliser les données
 
-Pour rendre les données textuelles exploitables par les algorithmes, il est crucial de les convertir en représentations numériques pondérées, comme le TF-IDF Transformer (Transformateur de Fréquence de Terme-Fréquence Inverse de Document). Le TF-IDF met en avant les termes les plus informatifs tout en réduisant l'impact des mots courants qui n’apportent pas de distinction au sein du corpus.
+TF-IDF, ou *Term Frequency-Inverse Document Frequency*, est une technique très courante en NLP pour évaluer l'importance d'un terme dans un document au sein d'une collection de documents (corpus).
 
-Le TF-IDF Transformer (Transformateur de Fréquence de Terme-Fréquence Inverse de Document) transforme les matrices de comptage en représentations pondérées, mettant en avant les termes les plus informatifs d'un document tout en réduisant l'impact des mots courants qui apportent peu de distinction au sein du corpus.
+L'idée est de mettre en avant les termes les plus informatifs et originaux d'un texte, tout en réduisant l'impact des mots courants qui n’apportent pas de distinction au sein du corpus. Pour cela, on calcule deux valeurs :
 
-L’objectif principal du TF-IDF Transformer est de transformer des données textuelles en données numériques, de manière à mettre en avant les mots les plus importants pour chaque document. Ce procédé est crucial car il rend les données exploitables par les modèles de machine learning, tout en augmentant leur capacité de discrimination entre les documents.
+- La fréquence du terme dans le document (TF) : le nombre de fois que le terme apparaît dans le document, divisé par le nombre total de termes dans le document.
+$$
+\text{TF}(t, d) = \frac{f_{t,d}}{\sum_{t' \in d} f_{t',d}}
+$$
+avec $f_{t,d}$ le nombre de fois que le terme $t$ apparaît dans le document $d$.
 
-:::{warning}
-À contrario des étapes précedentes, cette étape nécessite un corpus de données de manière à calculer les fréquences des mots. Cette étape est donc réalisée après la séparation des données en jeu d'entrainement et de test afin d'éviter les fuites de données entre les deux jeux de données.
-:::
+- L'inverse de la fréquence du terme dans les documents (IDF) : le logarithme du nombre total de documents dans le corpus divisé par le nombre de documents contenant le terme.
+$$\text{IDF}(t) = \log \left( \frac{N}{|\{d \in D : t \in d\}|} \right)$$
+où $N$ est le nombre total de documents dans le corpus et $|\{d \in D : t \in d\}|$ est le nombre de documents contenant le terme $t$.
+
+Pour chaque fréquence d'un mot observé dans un document, on multiplie cette fréquence par l'inverse de la fréquence du mot dans l'ensemble des documents : 
+
+$$\text{TF-IDF}(t, d) = \text{TF}(t, d) \times \text{IDF}(t)$$
+
+Cela permet de donner plus de poids aux mots rares et moins de poids aux mots fréquents.
 
 ## Les modèles
 
-Dans ce projet, nous avons sélectionné trois modèles classiques d’apprentissage automatique pour résoudre le problème de classification des emails : **Naïve Bayes**, **Régression Logistique**, et **Support Vector Machine** (SVM). Chaque modèle présente des caractéristiques uniques, des avantages et des inconvénients spécifiques pour la tâche de classification.
+Dans ce projet, nous avons sélectionné trois modèles classiques d’apprentissage automatique pour résoudre le problème de classification des emails : **Naïve Bayes**, **Régression Logistique**, et **Support Vector Classifier** (SVC). Chaque modèle présente des caractéristiques uniques, des avantages et des inconvénients spécifiques pour la tâche de classification.
 
 ### Méthode de Bayes naïve
 
@@ -132,9 +167,11 @@ Inconvénients :
 - Peut être sensible aux valeurs aberrantes, nécessitant un nettoyage préalable des données.
 - Peut nécessiter une régularisation (comme la pénalisation L1 ou L2) pour éviter le surajustement dans le cas de nombreuses variables explicatives.
 
-### Support-vector classification
+### Support-Vector Machine
 
-L'algorithme Support Vector Classification (SVC) est une méthode d'apprentissage supervisé utilisée pour résoudre des problèmes de classification binaire. Il repose sur le concept des marges maximales, c'est-à-dire qu'il cherche à séparer deux classes dans l'espace des caractéristiques en traçant un hyperplan qui maximise la distance (ou la marge) entre les points de chaque classe les plus proches de cette hyperplan, appelés vecteurs de support. Lorsque les classes ne sont pas linéairement séparables, l'algorithme utilise des noyaux pour projeter les données dans un espace de dimension supérieure où elles peuvent être séparées.
+L'algorithme Support Vector Machine (SVM) est une méthode d'apprentissage supervisé utilisée pour résoudre des problèmes de régression et de classification. En découle deux implémentations algorithmiques : l'une pour la régression (SVR) et l'autre pour la classification (SVC).
+
+L'algorithme SVM repose sur le concept des marges maximales, c'est-à-dire qu'il cherche à séparer deux classes dans l'espace des caractéristiques en traçant un hyperplan qui maximise la distance (ou la marge) entre les points de chaque classe les plus proches de cette hyperplan, appelés vecteurs de support. Lorsque les classes ne sont pas linéairement séparables, l'algorithme utilise des noyaux pour projeter les données dans un espace de dimension supérieure où elles peuvent être séparées.
 
 Avantages :
 - Efficace dans des espaces de grande dimension.
@@ -147,10 +184,12 @@ Inconvénients :
 
 ### Vue du modèle complet
 
-```{mermaid}
+:::{mermaid}
 flowchart LR
     A[(Labeled data)] --> G[Unescape HTML]
-    G --> B[CountVectorizer]
+    G --> H[Tokeniser]
+    H --> I[Stop Word Removal]
+    I --> B[CountVectorizer]
     B --> C[TfidfTransformer]
     
     subgraph Models
@@ -165,9 +204,11 @@ flowchart LR
 
     style A fill:#ffecb3,stroke:#f39c12,stroke-width:2px
     style G fill:#f7cac9,stroke:#c0392b,stroke-width:2px
+    style H fill:#f7cac9,stroke:#c0392b,stroke-width:2px
+    style I fill:#f7cac9,stroke:#c0392b,stroke-width:2px
     style B fill:#d1c4e9,stroke:#8e44ad,stroke-width:2px
     style C fill:#b2dfdb,stroke:#16a085,stroke-width:2px
-```
+:::
 
 ## Les résultats des modèles
 
@@ -182,8 +223,11 @@ Matrice de confusion
 - les vrais négatifs (TN) : les emails correctement prédits comme ham
 - les faux négatifs (FN) : les emails prédits comme ham alors qu'ils sont en réalité des spam
 
+Exactitude
+: L'exactitude (ou en anglais accuracy) mesure la proportion de prédictions correctes parmi toutes les prédictions effectuées par le modèle. Elle est définie par : $ \text{Exactitude} = \frac{TP + TN}{TP + TN + FP + FN} $
+
 Précision
-: La précision (ou en anglais accuracy) désigne la proportion de prédictions correctes parmi toutes les prédictions effectuées par le modèle. Elle permet d'évaluer la qualité des prédictions positives du modèle et est défini par : $ \text{Précision} = \frac{TP + TN}{TP + TN + FP + FN} $
+: La précision (ou en anglais precision) mesure la proportion de vrais positifs parmi tous les éléments identifiés comme positifs par le modèle. Elle permet d'évaluer la capacité du modèle à éviter les faux positifs et est définie par : $ \text{Précision} = \frac{TP}{TP + FP} $
 
 Rappel
 : Le rappel (ou en anglais recall) mesure la proportion de vrais positifs correctement identifiés parmi tous les éléments réellement positifs. Il permet d'évaluer la capacité du modèle à détecter tous les cas positifs et est défini par : $ \text{Rappel} = \frac{TP}{TP + FN} $
@@ -200,7 +244,7 @@ Pour transformer ces chiffres en classes, on utilise un seuil de décision. Si l
 
 L'analyse des probabilités prédites par un modèle permet de déterminer le seuil de décision optimal pour maximiser les performances du modèle. La plupart des modèles de classification binaire utilisent un seuil de décision par défaut de 0.5, mais ce seuil peut être ajusté pour améliorer les performances du modèle en fonction des besoins spécifiques de l'application.
 
-Par exemple, dans le cas de la détection de maladies, il est préférable de privilégier un taux de faux positifs élevé pour éviter de passer à côté de cas positifs. Dans ce cas, le seuil de décision peut être abaissé pour augmenter la sensibilité du modèle, même au détriment de la spécificité.
+Par exemple, dans le cas de la détection de maladies, il est préférable de privilégier un taux de faux positifs élevé pour éviter de passer à côté de cas positifs. Dans ce cas, le seuil de décision peut être abaissé pour augmenter le rappel du modèle, même au détriment de la spécificité.
 
 L'analyse des probabilités prédites par un modèle permet aussi de remarquer la capacité du modèle à distinguer plus ou moins bien les classes positives et négatives. Une probabilité de $0.9$ pour une observation positive signifie que le modèle est très sûr de sa prédiction, tandis qu'une probabilité de $0.6$ indique une prédiction moins certaine.
 
@@ -302,28 +346,6 @@ ROC Curve of Support-vector clustering model
 On constate que l'aire sous la courbe est de 0,99, très proche de 1, ce qui indique que le modèle est excellent pour distinguer les messages "spam" des messages "ham". La courbe montre également une forte sensibilité et une faible probabilité de faux positifs, car elle se situe dès le départ dans l'extrême coin supérieur gauche.
 
 Le modèle de classification par SVM présente une excellente précision, notamment pour la classe "spam". Toutefois, le rappel pour le "spam" est un peu faible comparé à celui pour la classe "ham", ce qui suggère une légère difficulté à identifier tous les spams.
-
-## Exemple des possibilités du Markdown 
-
-:::{code} python
-:filename: 00 Data extraction.ipynb
-def some_code(text='Hello World):
-    print(text)
-:::
-
-:::{caution}
-Une p-valeur faible dans le cadre de la corrélation de Pearson ne signifie pas nécessairement qu'il existe une relation de cause à effet entre les deux variables observées. Elle indique simplement que la corrélation observée est statistiquement significative. Ainsi, les hypothèses explicatives fournies sont simplement des hypothèses plausibles et non des conclusions définitives.
-:::
-
-Réutilisation d'une sortie d'un Notebook en tant que table :
-
-Some latex : $\frac{p}{n} = \Delta$
-
-1. Some list
-    - sub list 1
-    - sub list 2
-2. List 2
-    - sub list 1
 
 ## Conclusion
 
