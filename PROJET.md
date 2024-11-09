@@ -8,17 +8,27 @@ license: CC-BY-4.0
 
 ## Introduction 
 
-Aujourd'hui, les gens utilisent des services de messagerie électronique tels que Gmail, Outlook, etc. pour communiquer entre eux le plus rapidement possible afin d'envoyer des informations et des lettres officielles. Le courrier indésirable ou le spam est un défi majeur pour ce type de communication, souvent envoyé par des botnets dans le but de faire de la publicité, de nuire et de voler des informations en masse à différentes personnes. Recevoir quotidiennement des courriels indésirables remplit la boîte de réception. Par conséquent, la détection du spam est un défi fondamental, jusqu'à présent, de nombreux travaux ont été réalisés pour détecter le spam en utilisant des méthodes de regroupement et de catégorisation de texte. Dans ce projet, nous utilisons les bibliothèques de traitement du langage naturel spaCy et NLTK ainsi que 3 algorithmes d'apprentissage automatique (algorithme de Bayes naïf, la régression logistique et SVM) avec Python afin d'entraîner un classifieur binaire à détecter les courriels indésirables sur un ensemble de données disponible sur Kaggle.
+Les services de messagerie électronique, tels que Gmail, Outlook, ou Yahoo, sont devenus indispensables pour la communication rapide d’informations et de documents. Cependant, le courrier indésirable, ou spam, représente un défi de taille pour ces canaux de communication. Envoyé souvent par des réseaux automatisés (botnets), le spam envahit les boîtes de réception dans le but de promouvoir des produits, de mener des activités frauduleuses, ou de voler des informations. Ce flux continu de courriels indésirables réduit l’efficacité des échanges et expose les utilisateurs à des risques accrus de sécurité.
 
-Le terme **ham** est utilisé pour décrire les emails qui sont authentiques et qui ne sont pas considérés comme du spam. Les emails de type "ham" sont ceux que les utilisateurs veulent recevoir, comme des correspondances personnelles, des newsletters auxquelles ils se sont abonnés, etc.
+La détection de spam ne se limite pas aux emails personnels et professionnels. Elle a également des applications critiques dans plusieurs autres domaines numériques :
+- Les messageries instantanées : filtrage des messages indésirables
+- Les réseaux sociaux : détection de contenus inappropriés
 
-Le terme **spam** désigne quant à lui les emails indésirables, souvent envoyés en masse à une grande quantité de destinataires sans leur consentement. Le spam peut inclure des publicités non sollicitées, des offres frauduleuses, ou même des emails contenant des logiciels malveillants.
+Ces applications montrent l’importance de disposer de modèles efficaces de détection de spam, qui contribuent non seulement à la sécurité, mais également à la fluidité des interactions en ligne.
+
+Une des principale difficulté de la détection du spam réside dans la capacité de distinguer les courriels légitimes des messages indésirables, d'autant plus que le spam prend de nombreuses formes pour contourner les filtres de sécurité.
+
+Cette tâche de classification des emails repose sur des méthodes de traitement automatique du langage naturel (NLP) et des techniques d'apprentissage automatique pour regrouper et catégoriser les messages de façon précise.
+
+Dans ce projet, nous utilisons les bibliothèques de traitement du langage naturel spaCy et NLTK ainsi que 3 algorithmes d'apprentissage automatique (algorithme de Bayes naïf, la régression logistique et SVM) avec Python afin d'entraîner un classifieur binaire à détecter les courriels indésirables sur un jeu de données disponible sur Kaggle.
 
 ## Source des données
 
-Les données sont issues d'un jeu de données disponible sur [Kaggle](https://www.kaggle.com/datasets/rajnathpatel/multilingual-spam-data/).
+Les données sont issues d'un jeu de données disponible sur [Kaggle](https://www.kaggle.com/datasets/rajnathpatel/multilingual-spam-data/). Il contient $5672$ mails en anglais, français, allemand et Hindi. La langue original semble être l'anglais. Chaque mail a été manuellement annoté :
+- $4825$ mails sont classifiés en *ham*
+- $847$ mails sont classifiés en *spam*
 
-Décrire les données disponibles
+*Ham* est utilisé pour décrire les emails qui sont authentiques et qui ne sont pas considérés comme du spam.
 
 :::{table} Extrait du jeu de donnée original
 :label: table_original_data_head1
@@ -26,7 +36,7 @@ Décrire les données disponibles
 ![](#table_original_data_head)
 :::
 
-Le jeu de données est filtré afin de ne considérer que les mails écrit en Français. 
+Le jeu de données est filtré afin de ne considérer que les mails écrit en Français :
 
 :::{table} Extrait du jeu de donnée d'intérêt
 :label: table_data_head1
@@ -38,14 +48,9 @@ Le jeu de données est filtré afin de ne considérer que les mails écrit en Fr
 
 ### Classification binaire
 
-Le modèle prédit {0, 1} (ici spam ou ham).
-Les valeurs réelles sont dans {0, 1}.
+La classification binaire est un type de problème de machine learning supervisé dans lequel l'objectif est de classer les données en deux catégories distinctes. Chaque exemple dans les données est ainsi étiqueté comme appartenant à l'une des deux classes possibles. Dans le contexte de la détection de spam, notre modèle de classification binaire prédit si un email est un ham (authentique) ou un spam (indésirable), en utilisant les valeurs {0, 1} : 0 pour un ham et 1 pour un spam.
 
-La matrice de confusion est une matrice 2x2 qui permet de visualiser les performances d'un algorithme de classification. Elle contient quatre éléments : les vrais positifs (TP), les faux positifs (FP), les vrais négatifs (TN) et les faux négatifs (FN). Ces éléments sont utilisés pour calculer des métriques telles que la précision, le rappel et le score F1.
-
-Seuil de décision : C'est un chiffre compris entre 0 et 1, mais en général nous utilisons un seuil 0.5, de manière à ajuster le risque de première et seconde espèce à celui désiré.
-
-Expliquer l'ajustement possible du seuil de décision afin d'arbitrer entre les taux de faux positifs et vrai négatif. Expliquer pourquoi cela peut être important (par exemple, dans le cas de la détection de maladies, il est préférable de privilégier un taux de faux positifs élevé pour éviter de passer à côté de cas positifs).
+### Classes déséquilibrées
 
 Expliquer les problèmatiques liées aux classes déséquilibrées :
 - moins de données d'apprentissage pour certaines classe -> - le modèle n'apprend pas suffisamment à distinguer la classe minoritaire
@@ -56,24 +61,16 @@ Mention des techniques de rééquilibrage des classes (sous-échantillonnage, su
 
 #### Nettoyage des données
 
-- unescape HTML
-- retrait des mots d'arrêts
+Le nettoyage des données textuelles vise à améliorer la lisibilité et la pertinence des textes avant la classification. Voici les principales opérations de nettoyage réalisées :
+
+- Conversion des entités HTML : Les entités HTML (comme &amp; pour &) sont converties en leurs caractères correspondants, rendant le texte plus lisible et pertinent pour l’analyse.
+- Suppression des mots d'arrêt : Les mots d'arrêt (stop words) sont des mots fréquents mais peu informatifs pour la classification, comme « et », « de », « le ». Leur retrait réduit le volume de données à traiter, en ne conservant que les mots porteurs de sens pour l’analyse.
 
 #### Tokenisation 
 
-Processus de transformations des textes en token (unité linguistique)
-
-#### Vectorisation des textes
-
-Description des bases du CountVectorizer
-
-Le CountVectorizer est une méthode de représentation du texte. Elle fait partie des techniques de transformation en sac de mots (Bag of Words), où chaque texte est représenté par les fréquences d’apparition de ses mots, indépendamment de leur ordre.
-
-L'objectif de cette méthode est de convertir des données textuelles en données numériques en utilisant une matrice de comptage des mots. (Partie à retravailler nottament sur le fonctionnement)
+La tokenisation est le processus de division du texte en unités linguistiques appelées tokens (mots individuels, phrases, ou autres). Cette étape est essentielle pour capturer les caractéristiques pertinentes du texte et préparer les données pour la vectorisation et la modélisation.
 
 #### Stemming / Lemmatisation
-
-Description des bases du stemming et de la lemmatisation
 
 Le stemming et la lemmatisation sont deux techniques utilisés pour réduire des mots à leur forme de base. Cela aide à simplifier les texte.
 
@@ -83,9 +80,15 @@ La lemmatisation vise à ramener les mots à leur forme de base, appelée lemme,
 
 On peut dire que le stemming est plus rapide à utiliser que la lemmatisation mais par contre au niveau de la structure des mots le stemming est beaucoup moins précis.
 
+#### Vectorisation des textes
+
+La vectorisation consiste à convertir les textes en une représentation numérique vectorielle exploitable par les algorithmes de machine learning. Une des méthodes couramment utilisées est le CountVectorizer, qui repose sur l’approche du sac de mots (Bag of Words).
+
+Description du fonctionnement du CountVectorizer
+
 #### Utilisation de la fréquences des mots pour normaliser les données
 
-Description du TdifTransformer
+Pour rendre les données textuelles exploitables par les algorithmes, il est crucial de les convertir en représentations numériques pondérées, comme le TF-IDF Transformer (Transformateur de Fréquence de Terme-Fréquence Inverse de Document). Le TF-IDF met en avant les termes les plus informatifs tout en réduisant l'impact des mots courants qui n’apportent pas de distinction au sein du corpus.
 
 Le TF-IDF Transformer (Transformateur de Fréquence de Terme-Fréquence Inverse de Document) transforme les matrices de comptage en représentations pondérées, mettant en avant les termes les plus informatifs d'un document tout en réduisant l'impact des mots courants qui apportent peu de distinction au sein du corpus.
 
@@ -96,6 +99,8 @@ L’objectif principal du TF-IDF Transformer est de transformer des données tex
 :::
 
 ## Les modèles
+
+Dans ce projet, nous avons sélectionné trois modèles classiques d’apprentissage automatique pour résoudre le problème de classification des emails : **Naïve Bayes**, **Régression Logistique**, et **Support Vector Machine** (SVM). Chaque modèle présente des caractéristiques uniques, des avantages et des inconvénients spécifiques pour la tâche de classification.
 
 ### Méthode de Bayes naïve
 
@@ -135,12 +140,12 @@ Avantages :
 - Efficace dans des espaces de grande dimension.
 - Peut être modifié pour des cas non linéaires grâce aux fonctions noyau.
 - Utilise seulement les vecteurs de support, ce qui le rend plus économe en mémoire.
+
 Inconvénients :
 - Peut être sensible aux choix des paramètres (comme C et le type de noyau).
 - Moins performant avec de très grands ensembles de données ou quand les classes sont fortement chevauchées.
 
 ### Vue du modèle complet
-
 
 ```{mermaid}
 flowchart LR
@@ -170,19 +175,36 @@ flowchart LR
 
 Dans le cadre d'une classification binaire, on peut définir les termes suivants :
 
+Matrice de confusion
+: La matrice de confusion est une matrice 2x2 qui permet de visualiser les performances d'un algorithme de classification. Elle contient quatre éléments :
+- les vrais positifs (TP) : les emails correctement prédits comme spam
+- les faux positifs (FP) : les emails prédits comme spam alors qu'ils sont en réalité des ham
+- les vrais négatifs (TN) : les emails correctement prédits comme ham
+- les faux négatifs (FN) : les emails prédits comme ham alors qu'ils sont en réalité des spam
+
 Précision
-: La précision (ou en anglais accuracy) désigne la proportion de prédictions correctes parmi toutes les prédictions effectuées par le modèle. Elle permet d'évaluer la qualité des prédictions positives du modèle.
+: La précision (ou en anglais accuracy) désigne la proportion de prédictions correctes parmi toutes les prédictions effectuées par le modèle. Elle permet d'évaluer la qualité des prédictions positives du modèle et est défini par : $ \text{Précision} = \frac{TP + TN}{TP + TN + FP + FN} $
 
 Rappel
-: Le rappel (ou en anglais recall) mesure la proportion de vrais positifs correctement identifiés parmi tous les éléments réellement positifs. Il permet d'évaluer la capacité du modèle à détecter tous les cas positifs.
+: Le rappel (ou en anglais recall) mesure la proportion de vrais positifs correctement identifiés parmi tous les éléments réellement positifs. Il permet d'évaluer la capacité du modèle à détecter tous les cas positifs et est défini par : $ \text{Rappel} = \frac{TP}{TP + FN} $
 
 F1-score
-: Le F1-score est la moyenne harmonique de la précision et du rappel, permettant d'évaluer la performance globale d'un modèle en équilibrant ces deux métriques. Un score proche de 1 indique une excellente performance.
+: Le F1-score est la moyenne harmonique de la précision et du rappel ($ \text{F1-Score} = 2 \times \frac{\text{Précision} \times \text{Rappel}}{\text{Précision} + \text{Rappel}} $). Il permet d'évaluer la performance globale d'un modèle en équilibrant ces deux métriques. Un score proche de 1 indique une excellente performance.
 
 Weighted Average F1-score
 : Le F1-score moyen pondéré est une mesure utilisée pour évaluer les performances d'un modèle de classification binaire. Il prend en compte le déséquilibre des classes en calculant une moyenne pondérée des F1-scores de chaque classe, où les poids sont proportionnels au nombre d'instances de chaque classe. Cela permet d'obtenir une évaluation plus représentative des performances globales du modèle, en particulier lorsque les classes sont déséquilibrées.
 
-Les modèles de classifications binaires utilisées produisent en sortie un chiffre entre 0 et 1. Pour transformer ces chiffres en classes, on utilise un seuil de décision. Par défaut, ce seuil est de 0.5. Si le chiffre est supérieur à 0.5, la prédiction est de 1, sinon elle est de 0. Certains graphiques permettent de visualiser les performances des modèles selon ce seuil :
+La grande partie des modèles de classifications binaires produisent en sortie un chiffre entre 0 et 1, qui peut être vu comme la probabilité que l'observation appartienne à la classe positive. 
+
+Pour transformer ces chiffres en classes, on utilise un seuil de décision. Si la probabilité est supérieure à ce seuil, l'observation est classifiée en tant que classe positive, sinon elle est classifiée en tant que classe négative.
+
+L'analyse des probabilités prédites par un modèle permet de déterminer le seuil de décision optimal pour maximiser les performances du modèle. La plupart des modèles de classification binaire utilisent un seuil de décision par défaut de 0.5, mais ce seuil peut être ajusté pour améliorer les performances du modèle en fonction des besoins spécifiques de l'application.
+
+Par exemple, dans le cas de la détection de maladies, il est préférable de privilégier un taux de faux positifs élevé pour éviter de passer à côté de cas positifs. Dans ce cas, le seuil de décision peut être abaissé pour augmenter la sensibilité du modèle, même au détriment de la spécificité.
+
+L'analyse des probabilités prédites par un modèle permet aussi de remarquer la capacité du modèle à distinguer plus ou moins bien les classes positives et négatives. Une probabilité de $0.9$ pour une observation positive signifie que le modèle est très sûr de sa prédiction, tandis qu'une probabilité de $0.6$ indique une prédiction moins certaine.
+
+Certains graphiques permettent de visualiser les performances des modèles selon ce seuil :
 
 Courbe de précision-rappel
 : La courbe de précision-rappel affiche la précision et le rappel en fonction du seuil de décision. Elle permet d'évaluer la performance du modèle en fonction de ces deux métriques. Plus la courbe est proche du coin supérieur droit, meilleure est la performance du modèle.
