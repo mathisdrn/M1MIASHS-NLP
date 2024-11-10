@@ -290,34 +290,47 @@ Pour conclure, le modèle de Bayes Naïf présente d'excellentes performances. I
 
 ### La régression logistique
 
+La [](#table_report_LR) montre les résultats de la classification par le modèle de Régression Logistique. On observe que :
+- $80,36 \%$ des *spams* sont correctement identifiés
+- $99,86 \%$ des *hams* sont correctement identifiés
+- $98,80 \%$ des observations classifiées en tant que *spam* sont des *spams*
+- $97,05 \%$ des observations classifiées en tant que *ham* sont des *hams*
+- Le score F1 moyen pondéré est de $97,25 \%$ 
+
+Ces chiffres montrent que le modèle de la régression logistique est performant pour classer les messages en *spam* et *ham* mais il y a une légère difficulté à identifier correctement les *spams*.
+
 :::{table} Classification report of Logistic Regression model
 :label: table_report_LR1
 ![](#table_report_LR)
 :::
 
-Précision : La précision pour la classe "ham" de ce modèle est de 97,05 %, ce qui signifie que parmi tous les messages prédits comme "ham", 97,05 % étaient bien classés, ce qui montre qu'il y a très peu de mauvaises classifications. Parmi les messages classés comme "spam", 98,90 % sont correctement identifiés.
-
-Recall : Pour la classe "spam", le recall est de 80,86 %, ce qui signifie que parmi tous les messages réellement étiquetés comme "spam", le modèle en a identifié 80,86 %. Ce chiffre est bien inférieur à celui de la catégorie "ham", où le recall atteint 99,86 %. Cela montre que le modèle est plus performant pour détecter les messages étiquetés comme "ham".
-
-F1-score : Pour le "spam", l'F1-score est de 88,67 %, tandis que pour le "ham", il est de 98,43 %. Cela montre que le modèle est plus efficace pour détecter les messages étiquetés comme "ham".
+La [](#figure_pr_LR) présente la courbe précision-rappel pour le modèle de Régression Logistique. Cette figure permet d'observer les compromis possible entre la précision et le rappel en fonction du seuil de décision.
 
 :::{figure} #figure_pr_LR
 :label: figure_pr_LR1
 Precision-Recall Curve of Logistic Regression model
 :::
 
-On remarque sur le graphique de Precision-Recall que, plus on augmente le seuil, plus la courbe bleue (précision) s'élève, atteignant un score de 1 à partir d'un seuil de 0,4 et se maintenant à ce niveau jusqu'au seuil maximum. En revanche, pour la courbe verte (recall), on constate que plus le seuil augmente, plus le score diminue de façon marquée : dès un seuil de 0,2, le recall commence à chuter, passant sous 0,5 à un seuil de 0,7. Cela suggère que le modèle conserve une bonne précision même à des seuils plus élevés, mais perd de sa capacité à identifier les "spams" au fur et à mesure que le seuil augmente.
+La [](#figure_rocb_LR) présente la courbe ROC pour le modèle de Régression Logistique. On constate que l'aire sous la courbe est de $0,99$. Ce chiffre une excellente performance du modèle.
 
 :::{figure} #figure_roc_LR
 :label: figure_roc_LR1
 ROC Curve of Logistic Regression model
 :::
 
-On constate que l'aire sous la courbe est de 0.99, très proche de 1, ce qui indique que le modèle est excellent pour distinguer les messages "spam" des messages "ham". La courbe montre également une forte sensibilité et une faible probabilité de faux positifs, car elle se situe dès le départ dans l'extrême coin supérieur gauche.
 
-Le modèle de régression logistique est globalement performant, avec une AUC élevée et une bonne précision pour la classe "spam". Cependant, le rappel pour le "spam" est un peu plus faible que celui pour le "ham", ce qui pourrait indiquer une certaine difficulté à identifier tous les spams. On observe également, grâce au graphique de précision-rappel, que le modèle aura davantage de mal à classer correctement un message comme "spam" ou "ham" lorsque le seuil est élevé.
+Pour conclure, le modèle de Régression Logistique présente de bonnes performances. Il est capable de distinguer les messages *spam* des messages *ham* avec une grande précision et un bon rappel mais qui est un peut faible pour identification des *spams*. La courbe ROC montre une forte sensibilité et une faible probabilité de faux positifs, ce qui indique que le modèle est très performant pour distinguer les deux classes.
 
 ### Support-vector clustering
+
+La [](#table_report_SVC) montre les résultats de la classification par le modèle de Support-vector clustering. On observe que :
+- $89,29 \%$ des *spams* sont correctement identifiés
+- $100 \%$ des *hams* sont correctement identifiés
+- $100 \%$ des observations classifiées en tant que *spam* sont des *spams*
+- $98,37 \%$ des observations classifiées en tant que *ham* sont des *hams*
+- Le score F1 moyen pondéré est de $98,56 \%$ 
+
+Ces chiffres montrent que le modèle de Support-vector clustering est très performant pour classer les messages en *spam* et *ham*.
 
 :::{table} Classification report of Support-vector clustering model
 :label: table_report_SVC1
@@ -325,27 +338,22 @@ Le modèle de régression logistique est globalement performant, avec une AUC é
 ![](#table_report_SVC)
 :::
 
-Précision : Pour les messages classés comme "spam", la précision est de 100 %, ce qui signifie que tous les messages prédits comme "spam" sont effectivement des spams. Pour la classe "ham", la précision est de 98,37 %, ce qui indique que parmi tous les messages prédits comme "ham", 98,37 % étaient bien classés.
-
-Recall : Pour la classe "spam", le recall est de 89,29 %, ce qui signifie que parmi tous les messages réellement étiquetés comme "spam", le modèle en a identifié 89,29 %. Ce chiffre est inférieur à celui de la classe "ham", où le recall est de 100 %, signifiant que tous les messages "ham" ont été correctement identifiés.
-
-F1-score : Pour le "spam", le F1-score est de 94,34 %, tandis que pour le "ham", il est de 99,18 %. Cela montre que le modèle est plus efficace pour détecter les messages étiquetés comme "ham".
+La [](#figure_pr_SVC) présente la courbe précision-rappel pour le modèle de Support-vector clustering. Cette figure permet d'observer les compromis possible entre la précision et le rappel en fonction du seuil de décision.
 
 :::{figure} #figure_pr_SVC
 :label: figure_pr_SVC1
 Precision-Recall Curve of Support-vector clustering model
 :::
 
-On peut observer sur ce graphique que la courbe bleue (la précision) reste toujours à un niveau de score quasiment proche de 1, tandis que pour la courbe verte (le recall), on constate qu'à mesure que le seuil augmente, le score de recall diminue légérement à partir d'un seuil de 0.4. Cela signifie que plus le score est élevé, plus la probabilité de détecter un message comme spam diminue, même si la précision demeure satisfaisante.
+La [](#figure_roc_SVC) présente la courbe ROC pour le modèle de Support-vector clustering. On constate que l'aire sous la courbe est de $0,99$. Ce chiffre une excellente performance du modèle.
+
 
 :::{figure} #figure_roc_SVC
 :label: figure_roc_SVC1
 ROC Curve of Support-vector clustering model
 :::
 
-On constate que l'aire sous la courbe est de 0,99, très proche de 1, ce qui indique que le modèle est excellent pour distinguer les messages "spam" des messages "ham". La courbe montre également une forte sensibilité et une faible probabilité de faux positifs, car elle se situe dès le départ dans l'extrême coin supérieur gauche.
-
-Le modèle de classification par SVM présente une excellente précision, notamment pour la classe "spam". Toutefois, le rappel pour le "spam" est un peu faible comparé à celui pour la classe "ham", ce qui suggère une légère difficulté à identifier tous les spams.
+Pour conclure, le modèle de Support-vector clustering présente d'excellentes performances. Il est capable de distinguer les messages *spam* des messages *ham* avec une grande précision et un bon rappel. La courbe ROC montre une forte sensibilité et une faible probabilité de faux positifs, ce qui indique que le modèle est très performant pour distinguer les deux classes.
 
 ## Conclusion
 
