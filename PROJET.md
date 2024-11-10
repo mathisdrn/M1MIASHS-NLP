@@ -318,7 +318,7 @@ Pour conclure, le modèle de Bayes Naïf présente d'excellentes performances. I
 
 ### La régression logistique
 
-La [](#table_report_LR) montre les résultats de la classification par le modèle de Régression Logistique. On observe que :
+La [](#table_report_LR1) montre les résultats de la classification par le modèle de Régression Logistique. On observe que :
 - $80,36 \%$ des *spams* sont correctement identifiés
 - $99,86 \%$ des *hams* sont correctement identifiés
 - $98,80 \%$ des observations classifiées en tant que *spam* sont des *spams*
@@ -332,14 +332,14 @@ Ces chiffres montrent que le modèle de la régression logistique est performant
 ![](#table_report_LR)
 :::
 
-La [](#figure_pr_LR) présente la courbe précision-rappel pour le modèle de Régression Logistique. Cette figure permet d'observer les compromis possible entre la précision et le rappel en fonction du seuil de décision.
+La [](#figure_pr_LR1) présente la courbe précision-rappel pour le modèle de Régression Logistique. Cette figure permet d'observer les compromis possible entre la précision et le rappel en fonction du seuil de décision.
 
 :::{figure} #figure_pr_LR
 :label: figure_pr_LR1
 Precision-Recall Curve of Logistic Regression model
 :::
 
-La [](#figure_rocb_LR) présente la courbe ROC pour le modèle de Régression Logistique. On constate que l'aire sous la courbe est de $0,99$. Ce chiffre une excellente performance du modèle.
+La [](#figure_rocb_LR1) présente la courbe ROC pour le modèle de Régression Logistique. On constate que l'aire sous la courbe est de $0,99$. Ce chiffre une excellente performance du modèle.
 
 :::{figure} #figure_roc_LR
 :label: figure_roc_LR1
@@ -351,7 +351,7 @@ Pour conclure, le modèle de Régression Logistique présente de bonnes performa
 
 ### Support-vector clustering
 
-La [](#table_report_SVC) montre les résultats de la classification par le modèle de Support-vector clustering. On observe que :
+La [](#table_report_SVC1) montre les résultats de la classification par le modèle de Support-vector clustering. On observe que :
 - $89,29 \%$ des *spams* sont correctement identifiés
 - $100 \%$ des *hams* sont correctement identifiés
 - $100 \%$ des observations classifiées en tant que *spam* sont des *spams*
@@ -366,14 +366,14 @@ Ces chiffres montrent que le modèle de Support-vector clustering est très perf
 ![](#table_report_SVC)
 :::
 
-La [](#figure_pr_SVC) présente la courbe précision-rappel pour le modèle de Support-vector clustering. Cette figure permet d'observer les compromis possible entre la précision et le rappel en fonction du seuil de décision.
+La [](#figure_pr_SVC1) présente la courbe précision-rappel pour le modèle de Support-vector clustering. Cette figure permet d'observer les compromis possible entre la précision et le rappel en fonction du seuil de décision.
 
 :::{figure} #figure_pr_SVC
 :label: figure_pr_SVC1
 Precision-Recall Curve of Support-vector clustering model
 :::
 
-La [](#figure_roc_SVC) présente la courbe ROC pour le modèle de Support-vector clustering. On constate que l'aire sous la courbe est de $0,99$. Ce chiffre une excellente performance du modèle.
+La [](#figure_roc_SVC1) présente la courbe ROC pour le modèle de Support-vector clustering. On constate que l'aire sous la courbe est de $0,99$. Ce chiffre une excellente performance du modèle.
 
 
 :::{figure} #figure_roc_SVC
