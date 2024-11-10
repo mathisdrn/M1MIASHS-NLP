@@ -209,6 +209,15 @@ flowchart LR
     style B fill:#d1c4e9,stroke:#8e44ad,stroke-width:2px
     style C fill:#b2dfdb,stroke:#16a085,stroke-width:2px
 :::
+### Recherche hyperparamètre
+
+
+:::{image} ./assets/echantillon_entrainement.jpg
+:width: 700px
+:::
+
+
+### Validation Croisée
 
 ## Les résultats des modèles
 
