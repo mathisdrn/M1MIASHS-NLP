@@ -211,6 +211,7 @@ flowchart LR
 :::
 ### Recherche hyperparamètre
 
+La recherche d'hyperparamètre consiste à 
 
 :::{image} ./assets/echantillon_entrainement.jpg
 :width: 700px
