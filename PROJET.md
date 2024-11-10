@@ -209,16 +209,30 @@ flowchart LR
     style B fill:#d1c4e9,stroke:#8e44ad,stroke-width:2px
     style C fill:#b2dfdb,stroke:#16a085,stroke-width:2px
 :::
-### Recherche hyperparamètre
+### Greadsearch
 
-La recherche d'hyperparamètre consiste à 
+la GridSearch (recherche par grille) est une méthode permettant d'optimiser les hyperparamètres d'un modèle. Les hyperparamètres sont des paramètres à fixer avant l'entraînement du modèle et qui ont un impact direct sur sa performance.
+
+La GridSearch consiste à définir un ensemble de valeurs possibles pour chaque hyperparamètre, puis à tester toutes les combinaisons de ces valeurs afin de trouver celle qui maximise les performances du modèle. Chaque combinaison est évaluée, généralement à l'aide d'une validation croisée, pour déterminer la configuration offrant les meilleurs résultats.
 
 :::{image} ./assets/echantillon_entrainement.jpg
 :width: 700px
 :::
-
-
 ### Validation Croisée
+
+:::{image} ./assets/processus_validation_croisee.jpg
+:width: 700px
+:::
+
+La validation croisée est une méthode d'évaluation qui consiste à diviser l'ensemble des données en plusieurs sous-ensembles appelés "plis" (folds). À chaque itération, un pli est utilisé pour tester le modèle, tandis que les autres plis servent à l'entraîner. Ce processus se répète pour chaque pli, de sorte que chaque sous-ensemble est utilisé à la fois pour l'entraînement et pour le test. L'avantage de cette méthode est qu'elle permet une utilisation optimale des données disponibles, tout en réduisant le risque de biais lié à l'évaluation sur un seul jeu de test.
+Processus de la validation croisée.
+
+Dans le cadre de notre projet, nous utilisons une validation croisée à 5 plis. À chaque itération, l'algorithme est entraîné sur 4 plis et testé sur le pli restant, qui sert d'ensemble de test. Ainsi, à chaque tour, un pli différent est utilisé comme jeu de test, tandis que les 4 autres sont utilisés pour l'entraînement. Ce processus est répété 5 fois afin que chaque pli soit utilisé au moins une fois comme jeu de test. (Pour plus d'information voir le schéma ci-dessus)
+
+### recherche hyperparamètres
+
+
+
 
 ## Les résultats des modèles
 
