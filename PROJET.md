@@ -339,10 +339,10 @@ La [](#figure_pr_LR1) présente la courbe précision-rappel pour le modèle de R
 Precision-Recall Curve of Logistic Regression model
 :::
 
-La [](#figure_rocb_LR1) présente la courbe ROC pour le modèle de Régression Logistique. On constate que l'aire sous la courbe est de $0,99$. Ce chiffre une excellente performance du modèle.
+La [](#figure_roc_LR1) présente la courbe ROC pour le modèle de Régression Logistique. On constate que l'aire sous la courbe est de $0,99$. Ce chiffre une excellente performance du modèle.
 
 :::{figure} #figure_roc_LR
-:label: figure_roc_LR
+:label: figure_roc_LR1
 ROC Curve of Logistic Regression model
 :::
 
