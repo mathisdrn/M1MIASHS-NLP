@@ -209,30 +209,34 @@ flowchart LR
     style B fill:#d1c4e9,stroke:#8e44ad,stroke-width:2px
     style C fill:#b2dfdb,stroke:#16a085,stroke-width:2px
 :::
-### Greadsearch
 
-la GridSearch (recherche par grille) est une méthode permettant d'optimiser les hyperparamètres d'un modèle. Les hyperparamètres sont des paramètres à fixer avant l'entraînement du modèle et qui ont un impact direct sur sa performance.
+## Entrainement et évaluation des modèles
 
-La GridSearch consiste à définir un ensemble de valeurs possibles pour chaque hyperparamètre, puis à tester toutes les combinaisons de ces valeurs afin de trouver celle qui maximise les performances du modèle. Chaque combinaison est évaluée, généralement à l'aide d'une validation croisée, pour déterminer la configuration offrant les meilleurs résultats.
+Le jeu de données est divisé en deux parties : un ensemble d'entraînement et un ensemble de test. L'ensemble d'entraînement est utilisé pour entraîner les modèles et ajuster les hyperparamètres, tandis que l'ensemble de test est utilisé pour évaluer les performances des modèles sur des données non vues.
 
-:::{image} ./assets/echantillon_entrainement.jpg
-:width: 700px
-:::
-### Validation Croisée
+### Validation croisée
 
 :::{image} ./assets/processus_validation_croisee.jpg
 :width: 700px
 :::
 
-La validation croisée est une méthode d'évaluation qui consiste à diviser l'ensemble des données en plusieurs sous-ensembles appelés "plis" (folds). À chaque itération, un pli est utilisé pour tester le modèle, tandis que les autres plis servent à l'entraîner. Ce processus se répète pour chaque pli, de sorte que chaque sous-ensemble est utilisé à la fois pour l'entraînement et pour le test. L'avantage de cette méthode est qu'elle permet une utilisation optimale des données disponibles, tout en réduisant le risque de biais lié à l'évaluation sur un seul jeu de test.
-Processus de la validation croisée.
+La validation croisée (en anglais cross-validation) est une méthode d'évaluation qui consiste à diviser l'ensemble des données en plusieurs sous-ensembles appelés "plis" (folds). À chaque itération, un pli est utilisé pour tester le modèle, tandis que les autres plis servent à l'entraîner. Ce processus se répète pour chaque pli, de sorte que chaque sous-ensemble est utilisé à la fois pour l'entraînement et pour le test. 
 
-Dans le cadre de notre projet, nous utilisons une validation croisée à 5 plis. À chaque itération, l'algorithme est entraîné sur 4 plis et testé sur le pli restant, qui sert d'ensemble de test. Ainsi, à chaque tour, un pli différent est utilisé comme jeu de test, tandis que les 4 autres sont utilisés pour l'entraînement. Ce processus est répété 5 fois afin que chaque pli soit utilisé au moins une fois comme jeu de test. (Pour plus d'information voir le schéma ci-dessus)
+Cette méthode permet d'obtenir une évaluation plus robuste des performances du modèle en réduisant le risque de surajustement et en prenant en compte la variabilité des données. Elle est particulièrement utile lorsque l'ensemble de données est de petite taille ou que les classes sont déséquilibrées.
 
-### recherche hyperparamètres
+### Ajustement des hyperparamètres
 
+:::{image} ./assets/echantillon_entrainement.jpg
+:width: 700px
+:::
 
+Les hyperparamètres de nos 3 modèles sont ajustés à l'aide d'une recherche par grille (GridSearch) combinée à une validation croisée à 5 plis. La recherche par grille consiste à définir un ensemble de valeurs possibles pour chaque hyperparamètre, puis à tester toutes les combinaisons de ces valeurs afin de trouver celle qui maximise les performances du modèle. Chaque combinaison est évaluée, généralement à l'aide d'une validation croisée, pour déterminer la configuration offrant les meilleurs résultats.
 
+Dans notre cas la grille des hyperparamètres est la suivante : 
+- Preprocessing : **CountVectorizer()** `ngram_range` : (1, 1) ou (1, 2)
+- Bayes Naïf : **MultinomialNB()** `alpha` : np.linspace(0.1, 1, 5)
+- Régression Logistique : **LogisticRegression()** `C` : np.linspace(0.1, 1, 5)
+- SVC : **SVC()** `C` : np.linspace(0.1, 1, 5)
 
 ## Les résultats des modèles
 
