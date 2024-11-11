@@ -53,11 +53,12 @@ La classification binaire est un type de problème de machine learning supervis�
 
 ### Classes déséquilibrées
 
-Expliquer les problèmatiques liées aux classes déséquilibrées :
-- moins de données d'apprentissage pour certaines classe -> - le modèle n'apprend pas suffisamment à distinguer la classe minoritaire
-- la précision est biaisée car la classe majoritaire (ham) est sureprésentée
-Mention des techniques de rééquilibrage des classes (sous-échantillonnage, sur-échantillonnage, SMOTE)
+Dans le cas de la détection de spam, le nombre d’emails ham peut largement dépasser celui des emails spam, créant un déséquilibre de classes. Ce déséquilibre entraîne plusieurs défis :
 
+-Apprentissage insuffisant pour la classe minoritaire : Avec moins de données d’apprentissage pour la classe minoritaire (spam), le modèle n’a pas assez d’exemples pour apprendre efficacement à reconnaître ses caractéristiques distinctives. En conséquence, il peut avoir du mal à distinguer correctement les emails spam et être plus susceptible de les classer à tort comme des emails ham, ce qui se traduit par un taux de faux négatifs plus élevé.
+
+-Précision biaisée en faveur de la classe majoritaire : Dans les jeux de données déséquilibrés, la précision globale peut sembler élevée, car le modèle est performant sur la classe majoritaire (ham) surreprésentée. Cependant, cette métrique peut être trompeuse, car elle ne reflète pas la capacité réelle du modèle à détecter les cas positifs de la classe minoritaire (spam).
+Pour surmonter ces défis, plusieurs techniques de rééquilibrage des classes peuvent être appliquées pour améliorer la performance du modèle sur la classe minoritaire. Le sous-échantillonnage de la classe majoritaire consiste à réduire le nombre d'exemples de la classe ham afin de rééquilibrer le jeu de données. Le sur-échantillonnage de la classe minoritaire vise à augmenter le nombre d'exemples de la classe spam, généralement en dupliquant certains exemples existants. Enfin, le SMOTE (Synthetic Minority Over-sampling Technique) est une méthode avancée de sur-échantillonnage qui génère de nouveaux exemples synthétiques pour la classe minoritaire en interpolant entre des exemples existants, ce qui permet une meilleure généralisation du modèle.
 ### Prétraitement des données
 
 Le pré-traitement des données répond à de nombreux objectifs :
