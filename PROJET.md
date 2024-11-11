@@ -142,6 +142,14 @@ $$\text{TF-IDF}(t, d) = \text{TF}(t, d) \times \text{IDF}(t)$$
 
 Cela permet de donner plus de poids aux mots rares et moins de poids aux mots fréquents.
 
+### Explication des paramètres
+
+Les stopwords sont paramètrer dans la langue françaiser pour filtrer les mots inutiles, comme les articles, prépositions, et autres mots communs en français.
+Nous utilisons la langue françaises pour paramétrer les stemmings (qui servent à réduire les mots à la racine) et la tokenisation pour diviser le texte en mots.
+Dans la partie vectorize on utilise comme paramètre min_df qui signifie le minimum de fois que le mots doit apparaitre dans les documents pour être inclus dans la représentation. Dans notre cas le mot doit apparaitre au moins 5 fois. Le max_df signifie le maximum de fois au-delà du quel le mots doit être exclu du vocabulaire afin d'éviter qu'un mot soit peut informatif. Le "lowercase" est un paramètre qui permet au mots 
+
+
+
 ## Les modèles
 
 Dans ce projet, nous avons sélectionné trois modèles classiques d’apprentissage automatique pour résoudre le problème de classification des emails : **Naïve Bayes**, **Régression Logistique**, et **Support Vector Classifier** (SVC). Chaque modèle présente des caractéristiques uniques, des avantages et des inconvénients spécifiques pour la tâche de classification.
