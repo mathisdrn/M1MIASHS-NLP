@@ -115,6 +115,11 @@ Le stemming est plus rapide à utiliser que la lemmatisation, mais il est moins 
 
 La vectorisation consiste à convertir les textes en une représentation numérique vectorielle exploitable par les algorithmes de machine learning. Une des méthodes couramment utilisées consiste à associer à chaque mot un index unique, et à compter le nombre de fois que chaque mot apparaît dans chaque texte. On normalise ensuite ces comptes pour obtenir des vecteurs de fréquences de mots de taille fixe.
 
+:::{image} ./assets/n-gram.png
+:alt: N-gram illustration
+:width: 600px
+:::
+
 #### Utilisation de la fréquences des mots pour normaliser les données
 
 TF-IDF, ou *Term Frequency-Inverse Document Frequency*, est une technique très courante en NLP pour évaluer l'importance d'un terme dans un document au sein d'une collection de documents (corpus).
