@@ -410,6 +410,9 @@ Le modèle SVC présente d'excellentes performances. Il est capable de distingue
 
 ## Conclusion
 
+la conclusion
+
+
 +++ {"part": "data_availability"}
 L'ensemble des fichiers et données relatif à ce travail sont disponible en accès libre sur le [dépot GitHub](https://github.com/mathisdrn/head_coach_dismissal) sous licence MIT.
 +++
