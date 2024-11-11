@@ -144,10 +144,9 @@ Cela permet de donner plus de poids aux mots rares et moins de poids aux mots fr
 
 ### Explication des paramètres
 
-Les stopwords sont paramètrer dans la langue françaiser pour filtrer les mots inutiles, comme les articles, prépositions, et autres mots communs en français.
-Nous utilisons la langue françaises pour paramétrer les stemmings (qui servent à réduire les mots à la racine) et la tokenisation pour diviser le texte en mots.
-Dans la partie vectorize on utilise comme paramètre min_df qui signifie le minimum de fois que le mots doit apparaitre dans les documents pour être inclus dans la représentation. Dans notre cas le mot doit apparaitre au moins 5 fois. Le max_df signifie le maximum de fois au-delà du quel le mots doit être exclu du vocabulaire afin d'éviter qu'un mot soit peut informatif. Le "lowercase" est un paramètre qui permet au mots 
+Les stopwords sont définis en français pour filtrer les mots inutiles, comme les articles, prépositions et autres mots courants en français. La langue française est également utilisée pour configurer le stemming (réduction des mots à leur racine) ainsi que la tokenisation, qui divise le texte en mots.
 
+Dans la partie vectorisation, nous utilisons le paramètre min_df, qui représente le nombre minimum d'occurrences d'un mot dans les documents pour qu'il soit inclus dans la représentation vectorielle. Ici, un mot doit apparaître au moins 5 fois pour être retenu. Le paramètre max_df définit un seuil maximal d'apparition au-delà duquel un mot est exclu du vocabulaire, afin d’éviter l’inclusion de mots trop fréquents et peu informatifs. Enfin, le paramètre lowercase convertit tous les mots en minuscules pour uniformiser les termes.
 
 
 ## Les modèles
