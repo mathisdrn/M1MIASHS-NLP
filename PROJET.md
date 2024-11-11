@@ -1,9 +1,9 @@
 ---
-title: Spam Classification Model
+title: How to detect spam emails using machine learning
 short_title: Spam Detection
 ---
 
-## Introduction 
+## Introduction
 
 Les services de messagerie électronique, tels que Gmail, Outlook, ou Yahoo, sont devenus indispensables pour la communication rapide d’informations et de documents. Cependant, le courrier indésirable, ou spam, représente un défi de taille pour ces canaux de communication. Envoyé souvent par des réseaux automatisés (botnets), le spam envahit les boîtes de réception dans le but de promouvoir des produits, de mener des activités frauduleuses, ou de voler des informations. Ce flux continu de courriels indésirables réduit l’efficacité des échanges et expose les utilisateurs à des risques accrus de sécurité.
 
@@ -17,11 +17,15 @@ Une des principale difficulté de la détection du spam réside dans la capacit�
 
 Cette tâche de classification des emails repose sur des méthodes de traitement automatique du langage naturel (NLP) et des techniques d'apprentissage automatique pour regrouper et catégoriser les messages de façon précise.
 
-Dans ce projet, nous utilisons les bibliothèques de traitement du langage naturel spaCy et NLTK ainsi que 3 algorithmes d'apprentissage automatique (algorithme de Bayes naïf, la régression logistique et SVM) avec Python afin d'entraîner un classifieur binaire à détecter les courriels indésirables sur un jeu de données disponible sur Kaggle.
+Dans ce projet, nous utilisons les bibliothèques de traitement du langage naturel spaCy et NLTK ainsi que 3 algorithmes d'apprentissage automatique : l'algorithme de Bayes naïf, la régression logistique et Support Vector Machine; avec Python afin d'entraîner un classifieur binaire à détecter les courriels indésirables sur un jeu de données labellé.
+
+:::{note}
+L'implémentation des modèles est consultable à la fin de ce document.
+:::
 
 ## Source des données
 
-Les données sont issues d'un jeu de données disponible sur [Kaggle](https://www.kaggle.com/datasets/rajnathpatel/multilingual-spam-data/). Il contient $5672$ mails en anglais, français, allemand et Hindi. La langue original semble être l'anglais. Chaque mail a été manuellement annoté :
+Les données sont issues d'un jeu de données disponible sur [Kaggle](https://www.kaggle.com/datasets/rajnathpatel/multilingual-spam-data/). Il contient $5672$ mails en anglais, français, allemand et Hindi. La langue originale des mails semble être l'anglais. Chaque mail est labellisé comme étant un spam ou un ham :
 - $4825$ mails sont classifiés en `ham`
 - $847$ mails sont classifiés en `spam`
 
@@ -167,7 +171,7 @@ Inconvénients :
 - Peut être sensible aux valeurs aberrantes, nécessitant un nettoyage préalable des données.
 - Peut nécessiter une régularisation (comme la pénalisation L1 ou L2) pour éviter le surajustement dans le cas de nombreuses variables explicatives.
 
-### Support-Vector Machine
+### Support Vector Machine
 
 L'algorithme Support Vector Machine (SVM) est une méthode d'apprentissage supervisé utilisée pour résoudre des problèmes de régression et de classification. En découle deux implémentations algorithmiques : l'une pour la régression (SVR) et l'autre pour la classification (SVC).
 
@@ -216,27 +220,36 @@ Le jeu de données est divisé en deux parties : un ensemble d'entraînement et 
 
 ### Validation croisée
 
-:::{image} ./assets/processus_validation_croisee.jpg
-:width: 700px
-:::
-
 La validation croisée (en anglais cross-validation) est une méthode d'évaluation qui consiste à diviser l'ensemble des données en plusieurs sous-ensembles appelés "plis" (folds). À chaque itération, un pli est utilisé pour tester le modèle, tandis que les autres plis servent à l'entraîner. Ce processus se répète pour chaque pli, de sorte que chaque sous-ensemble est utilisé à la fois pour l'entraînement et pour le test. 
+
+:::{image} ./assets/processus_validation_croisee.jpg
+:width: 550px
+:alt: K-Fold Cross Validation
+:::
 
 Cette méthode permet d'obtenir une évaluation plus robuste des performances du modèle en réduisant le risque de surajustement et en prenant en compte la variabilité des données. Elle est particulièrement utile lorsque l'ensemble de données est de petite taille ou que les classes sont déséquilibrées.
 
 ### Ajustement des hyperparamètres
 
+Les données d'entraînement sont utilisées pour ajuster les hyperparamètres des modèles. Les hyperparamètres sont des paramètres qui ne sont pas appris par le modèle lui-même, mais qui doivent être définis par l'utilisateur avant l'entraînement. Ils permettent de contrôler le comportement du modèle et d'optimiser ses performances.
+
+On utilise la validation croisée pour évaluer les performances du modèle pour différentes valeurs des hyperparamètres, puis on sélectionne les valeurs qui maximisent les performances du modèle. Cette approche permet de trouver les hyperparamètres optimaux pour chaque modèle et d'obtenir des performances optimales.
+
+### Vue complète de l'entrainement
+
+Le schéma ci-dessous illustre le processus complet d'entraînement des modèles, de la préparation des données à l'évaluation des performances.
+
 :::{image} ./assets/echantillon_entrainement.jpg
-:width: 700px
+:width: 450px
+:alt: Pipeline of model training
 :::
 
-Les hyperparamètres de nos 3 modèles sont ajustés à l'aide d'une recherche par grille (GridSearch) combinée à une validation croisée à 5 plis. La recherche par grille consiste à définir un ensemble de valeurs possibles pour chaque hyperparamètre, puis à tester toutes les combinaisons de ces valeurs afin de trouver celle qui maximise les performances du modèle. Chaque combinaison est évaluée, généralement à l'aide d'une validation croisée, pour déterminer la configuration offrant les meilleurs résultats.
-
-Dans notre cas la grille des hyperparamètres est la suivante : 
-- Preprocessing : **CountVectorizer()** `ngram_range` : (1, 1) ou (1, 2)
-- Bayes Naïf : **MultinomialNB()** `alpha` : np.linspace(0.1, 1, 5)
-- Régression Logistique : **LogisticRegression()** `C` : np.linspace(0.1, 1, 5)
-- SVC : **SVC()** `C` : np.linspace(0.1, 1, 5)
+* L'échantillion d'entraînement représente $70 \%$ des données et l'échantillon de test $30 \%$.
+* Les hyperparamètres suivant sont ajustés pour chaque modèle :
+    - CountVectorizer : `ngram_range`
+    - Bayes Naïf : `alpha`
+    - Régression Logistique : `C`
+    - SVC : `C`
 
 ## Les résultats des modèles
 
@@ -307,18 +320,18 @@ La [](#figure_pr_bayes1) présente la courbe précision-rappel pour le modèle d
 Precision-Recall Curve of Naive Bayes model
 :::
 
-La [](#figure_roc_bayes1) présente la courbe ROC pour le modèle de Bayes naïf. On constate que l'aire sous la courbe est de $0,99$. Ce chiffre une excellente performance du modèle.
+La [](#figure_roc_bayes1) présente la courbe ROC pour le modèle de Bayes naïf. L'aire sous la courbe est de $0.99$ ce qui indique une excellente performance du modèle.
 
 :::{figure} #figure_roc_bayes
 :label: figure_roc_bayes1
 ROC Curve of Naive Bayes model
 :::
 
-Pour conclure, le modèle de Bayes Naïf présente d'excellentes performances. Il est capable de distinguer les messages *spam* des messages *ham* avec une grande précision et un bon rappel. La courbe ROC montre une forte sensibilité et une faible probabilité de faux positifs, ce qui indique que le modèle est très performant pour distinguer les deux classes.
+Le modèle de Bayes naïf présente d'excellentes performances. Il est capable de distinguer les messages *spam* des messages *ham* avec une grande précision et un bon rappel. La courbe ROC montre une forte sensibilité et une faible probabilité de faux positifs, ce qui indique que le modèle est très performant pour distinguer les deux classes.
 
 ### La régression logistique
 
-La [](#table_report_LR1) montre les résultats de la classification par le modèle de Régression Logistique. On observe que :
+La [](#table_report_LR1) montre les résultats de la classification par le modèle de régression logistique. On observe que :
 - $80,36 \%$ des *spams* sont correctement identifiés
 - $99,86 \%$ des *hams* sont correctement identifiés
 - $98,80 \%$ des observations classifiées en tant que *spam* sont des *spams*
@@ -332,14 +345,14 @@ Ces chiffres montrent que le modèle de la régression logistique est performant
 ![](#table_report_LR)
 :::
 
-La [](#figure_pr_LR1) présente la courbe précision-rappel pour le modèle de Régression Logistique. Cette figure permet d'observer les compromis possible entre la précision et le rappel en fonction du seuil de décision.
+La [](#figure_pr_LR1) présente la courbe précision-rappel pour le modèle de régression logistique. Cette figure permet d'observer les compromis possible entre la précision et le rappel en fonction du seuil de décision.
 
 :::{figure} #figure_pr_LR
 :label: figure_pr_LR1
 Precision-Recall Curve of Logistic Regression model
 :::
 
-La [](#figure_roc_LR1) présente la courbe ROC pour le modèle de Régression Logistique. On constate que l'aire sous la courbe est de $0,99$. Ce chiffre une excellente performance du modèle.
+La [](#figure_roc_LR1) présente la courbe ROC pour le modèle de régression logistique. L'aire sous la courbe est de $0.99$ ce qui indique une excellente performance du modèle.
 
 :::{figure} #figure_roc_LR
 :label: figure_roc_LR1
@@ -347,41 +360,41 @@ ROC Curve of Logistic Regression model
 :::
 
 
-Pour conclure, le modèle de Régression Logistique présente de bonnes performances. Il est capable de distinguer les messages *spam* des messages *ham* avec une grande précision et un bon rappel mais qui est un peut faible pour identification des *spams*. La courbe ROC montre une forte sensibilité et une faible probabilité de faux positifs, ce qui indique que le modèle est très performant pour distinguer les deux classes.
+Le modèle de régression logistique présente de bonnes performances. Il est capable de distinguer les messages *spam* des messages *ham* avec une grande précision et un bon rappel mais qui est un peut faible pour identification des *spams*. La courbe ROC montre une forte sensibilité et une faible probabilité de faux positifs, ce qui indique que le modèle est très performant pour distinguer les deux classes.
 
-### Support-vector clustering
+### Support Vector Classification
 
-La [](#table_report_SVC1) montre les résultats de la classification par le modèle de Support-vector clustering. On observe que :
+La [](#table_report_SVC1) montre les résultats de la classification par le modèle SVC. On observe que :
 - $89,29 \%$ des *spams* sont correctement identifiés
 - $100 \%$ des *hams* sont correctement identifiés
 - $100 \%$ des observations classifiées en tant que *spam* sont des *spams*
 - $98,37 \%$ des observations classifiées en tant que *ham* sont des *hams*
 - Le score F1 moyen pondéré est de $98,56 \%$ 
 
-Ces chiffres montrent que le modèle de Support-vector clustering est très performant pour classer les messages en *spam* et *ham*.
+Ces chiffres montrent que le modèle de SVC est très performant pour classer les messages en *spam* et *ham*.
 
-:::{table} Classification report of Support-vector clustering model
+:::{table} Classification report of SVC model
 :label: table_report_SVC1
 :align: center
 ![](#table_report_SVC)
 :::
 
-La [](#figure_pr_SVC1) présente la courbe précision-rappel pour le modèle de Support-vector clustering. Cette figure permet d'observer les compromis possible entre la précision et le rappel en fonction du seuil de décision.
+La [](#figure_pr_SVC1) présente la courbe précision-rappel pour le modèle de SVC. Cette figure permet d'observer les compromis possible entre la précision et le rappel en fonction du seuil de décision.
 
 :::{figure} #figure_pr_SVC
 :label: figure_pr_SVC1
-Precision-Recall Curve of Support-vector clustering model
+Precision-Recall Curve of SVC model
 :::
 
-La [](#figure_roc_SVC1) présente la courbe ROC pour le modèle de Support-vector clustering. On constate que l'aire sous la courbe est de $0,99$. Ce chiffre une excellente performance du modèle.
+La [](#figure_roc_SVC1) présente la courbe ROC pour le modèle SVC. On constate que l'aire sous la courbe est de $0,99$. L'aire sous la courbe est de $0.99$ ce qui indique une excellente performance du modèle.
 
 
 :::{figure} #figure_roc_SVC
 :label: figure_roc_SVC1
-ROC Curve of Support-vector clustering model
+ROC Curve of SVC model
 :::
 
-Pour conclure, le modèle de Support-vector clustering présente d'excellentes performances. Il est capable de distinguer les messages *spam* des messages *ham* avec une grande précision et un bon rappel. La courbe ROC montre une forte sensibilité et une faible probabilité de faux positifs, ce qui indique que le modèle est très performant pour distinguer les deux classes.
+Le modèle SVC présente d'excellentes performances. Il est capable de distinguer les messages *spam* des messages *ham* avec une grande précision et un bon rappel. La courbe ROC montre une forte sensibilité et une faible probabilité de faux positifs, ce qui indique que le modèle est très performant pour distinguer les deux classes.
 
 ## Conclusion
 
