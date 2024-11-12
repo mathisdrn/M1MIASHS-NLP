@@ -348,7 +348,7 @@ La [](#figure_roc_bayes1) présente la courbe ROC pour le modèle de Bayes naïf
 ROC Curve of Naive Bayes model
 :::
 
-Le modèle de Bayes naïf présente d'excellentes performances. Il est capable de distinguer les messages *spam* des messages *ham* avec une grande précision et un bon rappel. La courbe ROC montre une forte sensibilité et une faible probabilité de faux positifs, ce qui indique que le modèle est très performant pour distinguer les deux classes.
+
 
 ### La régression logistique
 
@@ -381,7 +381,7 @@ ROC Curve of Logistic Regression model
 :::
 
 
-Le modèle de régression logistique présente de bonnes performances. Il est capable de distinguer les messages *spam* des messages *ham* avec une grande précision et un bon rappel mais qui est un peut faible pour identification des *spams*. La courbe ROC montre une forte sensibilité et une faible probabilité de faux positifs, ce qui indique que le modèle est très performant pour distinguer les deux classes.
+
 
 ### Support Vector Classification
 
@@ -415,12 +415,12 @@ La [](#figure_roc_SVC1) présente la courbe ROC pour le modèle SVC. On constate
 ROC Curve of SVC model
 :::
 
-Le modèle SVC présente d'excellentes performances. Il est capable de distinguer les messages *spam* des messages *ham* avec une grande précision et un bon rappel. La courbe ROC montre une forte sensibilité et une faible probabilité de faux positifs, ce qui indique que le modèle est très performant pour distinguer les deux classes.
+
 
 ## Conclusion
 
 
-Les trois modèles étudiés présentent de bonnes performances et sont capables de distinguer efficacement les messages spam des messages ham. Les résultats montrent que leurs performances sont comparables, confirmant que chacun de ces modèles peut être utilisé de manière fiable pour répondre aux besoins de classification des spams et assurer une distinction efficace entre les deux types de messages
+Les trois modèles étudiés présentent de bonnes performances et sont capables de distinguer efficacement les messages spam des messages ham. Les résultats montrent que leurs performances sont comparables, confirmant que chacun de ces modèles peut être utilisé de manière fiable pour répondre aux besoins de classification des spams et assurer une distinction efficace entre les deux types de messages.
 
 
 
