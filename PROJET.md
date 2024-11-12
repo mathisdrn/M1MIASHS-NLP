@@ -53,12 +53,18 @@ La classification binaire est un type de problème de machine learning supervis�
 
 ### Classes déséquilibrées
 
-Dans le cas de la détection de spam, le nombre d’emails ham peut largement dépasser celui des emails spam, créant un déséquilibre de classes. Ce déséquilibre entraîne plusieurs défis :
+L'un des enjeux liés aux problèmes de classification est la présence de classes déséquilibrées. On parle de classes déséquilibrées lorsque les données d'entraînement contiennent un grand déséquilibre entre le nombre d'exemples de chaque classe. C'est par exemple le cas de notre jeu de données où seulement $15 %$ des mail sont des spams.
 
-- Apprentissage insuffisant pour la classe minoritaire : Avec moins de données d’apprentissage pour la classe minoritaire (spam), le modèle n’a pas assez d’exemples pour apprendre efficacement à reconnaître ses caractéristiques distinctives. En conséquence, il peut avoir du mal à distinguer correctement les emails spam et être plus susceptible de les classer à tort comme des emails ham, ce qui se traduit par un taux de faux négatifs plus élevé.
+Ce déséquilibre peut poser plusieurs défis pour l'apprentissage automatique :
 
-- Précision biaisée en faveur de la classe majoritaire : Dans les jeux de données déséquilibrés, la précision globale peut sembler élevée, car le modèle est performant sur la classe majoritaire (ham) surreprésentée. Cependant, cette métrique peut être trompeuse, car elle ne reflète pas la capacité réelle du modèle à détecter les cas positifs de la classe minoritaire (spam).
-Pour surmonter ces défis, plusieurs techniques de rééquilibrage des classes peuvent être appliquées pour améliorer la performance du modèle sur la classe minoritaire. Le sous-échantillonnage de la classe majoritaire consiste à réduire le nombre d'exemples de la classe ham afin de rééquilibrer le jeu de données. Le sur-échantillonnage de la classe minoritaire vise à augmenter le nombre d'exemples de la classe spam, généralement en dupliquant certains exemples existants. Enfin, le SMOTE (Synthetic Minority Over-sampling Technique) est une méthode avancée de sur-échantillonnage qui génère de nouveaux exemples synthétiques pour la classe minoritaire en interpolant entre des exemples existants, ce qui permet une meilleure généralisation du modèle.
+- Apprentissage insuffisant : avec moins de données d’apprentissage pour la classe minoritaire, le modèle ne parvient pas à reconnaître efficacement les caractéristiques distinctives de la classe minoritaire.
+- Le modèle favorise la bonne classification de la classe majoritaire, car il minimise l'erreur globale en classant la plupart des exemples dans la classe majoritaire.
+- Les métriques de performance du modèle sur-représente la performance du modèle à évaluer la classe majoritaire.
+
+Plusieurs solutions peuvent être mises en place pour pallier ces problèmes, comme le sur-échantillonnage de la classe minoritaire, le sous-échantillonnage de la classe majoritaire, ou la création de données synthétiques à l'aide d'interpolation afin de rééquilibrer les classes.
+
+Il faut aussi noter que tous les modèles ne sont pas affectés de la même manière à ces problématiques, SVM et Naïve Bayes sont considérés comme plus robustes face à des classes déséquilibrées.
+
 ### Prétraitement des données
 
 Le pré-traitement des données répond à de nombreux objectifs :
