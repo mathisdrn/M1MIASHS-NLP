@@ -61,7 +61,7 @@ Ce déséquilibre peut poser plusieurs défis pour l'apprentissage automatique :
 - Le modèle favorise la bonne classification de la classe majoritaire, car il minimise l'erreur globale en classant la plupart des exemples dans la classe majoritaire.
 - Les métriques de performance du modèle sur-représente la performance du modèle à évaluer la classe majoritaire.
 
-Plusieurs solutions peuvent être mises en place pour pallier ces problèmes, comme le sur-échantillonnage de la classe minoritaire, le sous-échantillonnage de la classe majoritaire, ou la création de données synthétiques à l'aide d'interpolation afin de rééquilibrer les classes.
+Plusieurs solutions peuvent être mises en place pour pallier ces problèmes, comme le sur-échantillonnage de la classe minoritaire, le sous-échantillonnage de la classe majoritaire, ou la création de données synthétiques à l'aide d'interpolation afin de rééquilibrer les classes. Certains modèles permettent aussi de donner plus de poids aux exemples de la classe minoritaire pour les rendre plus importants lors de l'apprentissage.
 
 Il faut aussi noter que tous les modèles ne sont pas affectés de la même manière à ces problématiques, SVM et Naïve Bayes sont considérés comme plus robustes face à des classes déséquilibrées.
 
