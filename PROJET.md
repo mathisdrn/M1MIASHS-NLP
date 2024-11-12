@@ -423,5 +423,5 @@ Ce projet a permis de concevoir un classifieur de spam performant en utilisant d
 
 
 +++ {"part": "data_availability"}
-L'ensemble des fichiers et données relatif à ce travail sont disponible en accès libre sur le [dépot GitHub](https://github.com/mathisdrn/head_coach_dismissal) sous licence MIT.
+L'ensemble des fichiers et données relatif à ce travail sont disponible en accès libre sur le [dépot GitHub](https://github.com/mathisdrn/M1MIASHS-NLP) sous licence MIT.
 +++
