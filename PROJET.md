@@ -419,7 +419,10 @@ Le modèle SVC présente d'excellentes performances. Il est capable de distingue
 
 ## Conclusion
 
-Ce projet a permis de concevoir un classifieur de spam performant en utilisant des techniques de traitement du langage naturel (NLP) et des algorithmes d’apprentissage automatique comme Bayes naïf, régression logistique, et SVM. En appliquant des méthodes de rééquilibrage des classes et des ajustements d'hyperparamètres, nous avons surmonté les défis liés au déséquilibre des données et à la diversité des spams. Les résultats montrent l’efficacité de notre approche pour améliorer la sécurité et l’expérience utilisateur sur les plateformes de messagerie, contribuant à rendre les échanges numériques plus sûrs et fluides.
+
+Les trois modèles étudiés présentent de bonnes performances et sont capables de distinguer efficacement les messages spam des messages ham. Les résultats montrent que leurs performances sont comparables, confirmant que chacun de ces modèles peut être utilisé de manière fiable pour répondre aux besoins de classification des spams et assurer une distinction efficace entre les deux types de messages
+
+
 
 
 +++ {"part": "data_availability"}
