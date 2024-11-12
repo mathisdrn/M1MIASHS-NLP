@@ -263,12 +263,14 @@ Le schéma ci-dessous illustre le processus complet d'entraînement des modèles
 :alt: Pipeline of model training
 :::
 
+Voici les divers paramètres utilisés pour chaque modèle :
+
 * L'échantillion d'entraînement représente $70 \%$ des données et l'échantillon de test $30 \%$.
 * Les hyperparamètres suivant sont ajustés pour chaque modèle :
-    - CountVectorizer : `ngram_range`
-    - Bayes Naïf : `alpha`
-    - Régression Logistique : `C`
-    - SVC : `C`
+    - CountVectorizer : `ngram_range` soit (1,1) ou (1,2)
+    - Bayes Naïf : `alpha` 5 valeurs entre 0.1 et 1
+    - Régression Logistique : `C` 5 valeurs entre 0.1 et 1
+    - SVC : `C` 5 valeurs entre 0.1 et 1
 
 ## Les résultats des modèles
 
