@@ -341,14 +341,12 @@ La [](#figure_pr_bayes1) présente la courbe précision-rappel pour le modèle d
 Precision-Recall Curve of Naive Bayes model
 :::
 
-La [](#figure_roc_bayes1) présente la courbe ROC pour le modèle de Bayes naïf. L'aire sous la courbe est de $0.99$ ce qui indique une excellente performance du modèle.
+La [](#figure_roc_bayes1) présente la courbe ROC pour le modèle de Bayes naïf. L'aire sous la courbe est de $0.99$ ce qui indique une excellente performance du modèle. La courbe ROC montre un 
 
 :::{figure} #figure_roc_bayes
 :label: figure_roc_bayes1
 ROC Curve of Naive Bayes model
 :::
-
-
 
 ### La régression logistique
 
@@ -379,9 +377,6 @@ La [](#figure_roc_LR1) présente la courbe ROC pour le modèle de régression lo
 :label: figure_roc_LR1
 ROC Curve of Logistic Regression model
 :::
-
-
-
 
 ### Support Vector Classification
 
@@ -415,15 +410,9 @@ La [](#figure_roc_SVC1) présente la courbe ROC pour le modèle SVC. On constate
 ROC Curve of SVC model
 :::
 
-
-
 ## Conclusion
 
-
 Les trois modèles étudiés présentent de bonnes performances et sont capables de distinguer efficacement les messages spam des messages ham. Les résultats montrent que leurs performances sont comparables, confirmant que chacun de ces modèles peut être utilisé de manière fiable pour répondre aux besoins de classification des spams et assurer une distinction efficace entre les deux types de messages.
-
-
-
 
 +++ {"part": "data_availability"}
 L'ensemble des fichiers et données relatif à ce travail sont disponible en accès libre sur le [dépot GitHub](https://github.com/mathisdrn/M1MIASHS-NLP) sous licence MIT.
