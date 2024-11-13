@@ -321,11 +321,11 @@ Courbe ROC (Receiver Operating Characteristic)
 ### Bayes naïf
 
 La [](#table_report_bayes1) montre les résultats de la classification par le modèle de Bayes naïf. On observe que :
-- $90,62 \%$ des *spams* sont correctement identifiés
-- $99,72 \%$ des *hams* sont correctement identifiés
-- $98,07 \%$ des observations classifiées en tant que *spam* sont des *spams*
-- $98,57 \%$ des observations classifiées en tant que *ham* sont des *hams*
-- Le score F1 moyen pondéré est de $98,48 \%$ 
+- $91,52 \%$ des *spams* sont correctement identifiés
+- $99,86 \%$ des *hams* sont correctement identifiés
+- $99,03 \%$ des observations classifiées en tant que *spam* sont des *spams*
+- $98,70 \%$ des observations classifiées en tant que *ham* sont des *hams*
+- Le score F1 moyen pondéré est de $98,74 \%$ 
 
 Ces chiffres montrent que le modèle de Bayes naïf est très performant pour classer les messages en *spam* et *ham*.
 
@@ -351,11 +351,11 @@ ROC Curve of Naive Bayes model
 ### La régression logistique
 
 La [](#table_report_LR1) montre les résultats de la classification par le modèle de régression logistique. On observe que :
-- $80,36 \%$ des *spams* sont correctement identifiés
-- $99,86 \%$ des *hams* sont correctement identifiés
-- $98,80 \%$ des observations classifiées en tant que *spam* sont des *spams*
-- $97,05 \%$ des observations classifiées en tant que *ham* sont des *hams*
-- Le score F1 moyen pondéré est de $97,25 \%$ 
+- $83,04 \%$ des *spams* sont correctement identifiés
+- $99,59 \%$ des *hams* sont correctement identifiés
+- $96,88 \%$ des observations classifiées en tant que *spam* sont des *spams*
+- $97,43 \%$ des observations classifiées en tant que *ham* sont des *hams*
+- Le score F1 moyen pondéré est de $97,98 \%$ 
 
 Ces chiffres montrent que le modèle de la régression logistique est performant pour classer les messages en *spam* et *ham* mais il y a une légère difficulté à identifier correctement les *spams*.
 
@@ -381,11 +381,11 @@ ROC Curve of Logistic Regression model
 ### Support Vector Classification
 
 La [](#table_report_SVC1) montre les résultats de la classification par le modèle SVC. On observe que :
-- $89,29 \%$ des *spams* sont correctement identifiés
+- $92,41 \%$ des *spams* sont correctement identifiés
 - $100 \%$ des *hams* sont correctement identifiés
 - $100 \%$ des observations classifiées en tant que *spam* sont des *spams*
 - $98,37 \%$ des observations classifiées en tant que *ham* sont des *hams*
-- Le score F1 moyen pondéré est de $98,56 \%$ 
+- Le score F1 moyen pondéré est de $98,98 \%$ 
 
 Ces chiffres montrent que le modèle de SVC est très performant pour classer les messages en *spam* et *ham*.
 
