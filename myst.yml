@@ -23,16 +23,6 @@ project:
   affiliations: 
     - id: uol
       institution: University of Lyon
-  exports:
-    - format: typst
-      template: lapreprint-typst
-      output: ./exports/project.pdf
-      articles:
-        - file: PROJET.md
-  downloads:
-  - file: https://raw.githubusercontent.com/mathisdrn/M1MIASHS-NLP/master/exports/project.pdf
-    title: PDF version
-    filename: project.pdf
 site:
   template: article-theme
   options:
