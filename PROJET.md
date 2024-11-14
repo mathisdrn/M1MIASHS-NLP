@@ -53,7 +53,7 @@ La classification binaire est un type de problème de machine learning supervis�
 
 ### Classes déséquilibrées
 
-L'un des enjeux liés aux problèmes de classification est la présence de classes déséquilibrées. On parle de classes déséquilibrées lorsque les données d'entraînement contiennent un grand déséquilibre entre le nombre d'exemples de chaque classe. C'est par exemple le cas de notre jeu de données où seulement $15 %$ des mail sont des spams.
+L'un des enjeux liés aux problèmes de classification est la présence de classes déséquilibrées. On parle de classes déséquilibrées lorsque les données d'entraînement contiennent un grand déséquilibre entre le nombre d'exemples de chaque classe. C'est par exemple le cas de notre jeu de données où seulement $15 \%$ des mail sont des spams.
 
 Ce déséquilibre peut poser plusieurs défis pour l'apprentissage automatique :
 
@@ -88,20 +88,46 @@ Ci-dessous sont présentées les différentes étapes de pré-traitement des don
 
 #### Nettoyage des données
 
-Le texte contient des entités HTML. Ceux-ci sont transformés dans leur forme lisible. Par exemple `&eacute;` est transformé en `é`.
+* Le texte contient des entités HTML. Ceux-ci sont transformés dans leur forme lisible. Par exemple `&eacute;` est transformé en `é`.
+* On transforme les textes en caractères minuscules.
+* À l'aide d'expressions régulières, on identifie certaines informations comme des adresses email, des URL, des potentiels numéros de téléphones, des chiffres et on les remplace par des mots clés (`EMAIL`, `URL`, `PHONE`, `DIGIT`). 
+* On supprime les accents
+* On supprime les guillemets simple présent dans de nombreux mots français (ex: `j'ai`), cela permet par la suite du supprimer tout les caracthère non alphabétique par un espace sans perdre de mots.
+* On supprime les caractères non alphabétiques
+* On supprime les mots d'arrêt (stop words), ces mot d'arrêt sont des mots fréquents mais peu informatifs pour la classification, tels que `et`, `de`, `le`. Leur retrait réduit le volume de données à traiter, ne conservant que les mots porteurs de sens pour l’analyse.
 
-La suppression des mots d'arrêt (stop words) élimine les mots fréquents mais peu informatifs pour la classification, tels que « et », « de », « le ». Leur retrait réduit le volume de données à traiter, ne conservant que les mots porteurs de sens pour l’analyse.
+:::{mermaid}
+flowchart LR
+    A[(Raw Text)] --> B[Unescape HTML]
+    B --> C[Lowercase]
+    C --> D[Features extraction]
+    D --> E[Accents]
+    E --> F[Single Quotes]
+    F --> G[Non-Alphabetic Characters]
+    G --> H[Stop Words]
+    H --> I[(Cleaned Text)]
+
+    style A fill:#ffecb3,stroke:#f39c12,stroke-width:2px
+    style B fill:#f7cac9,stroke:#c0392b,stroke-width:2px
+    style C fill:#f7cac9,stroke:#c0392b,stroke-width:2px
+    style D fill:#f7cac9,stroke:#c0392b,stroke-width:2px
+    style E fill:#f7cac9,stroke:#c0392b,stroke-width:2px
+    style F fill:#f7cac9,stroke:#c0392b,stroke-width:2px
+    style G fill:#f7cac9,stroke:#c0392b,stroke-width:2px
+    style H fill:#f7cac9,stroke:#c0392b,stroke-width:2px
+    style I fill:#d8f5c1,stroke:#b9d1a5,stroke-width:2px
+:::
 
 #### Tokenisation 
 
 La tokenisation est le processus de division du texte en unités linguistiques appelées tokens (mots individuels, phrases, ou autres). Cette étape est essentielle pour capturer les caractéristiques pertinentes du texte et préparer les données pour la vectorisation et la modélisation.
 
-```mermaid
+:::{mermaid}
 graph TD
     A["I love biscuits"] --> B["I"]
     A --> C["love"]
     A --> D["biscuits"]
-```
+:::
 
 #### Stemming et Lemmatisation
 
@@ -122,9 +148,13 @@ Le stemming est plus rapide à utiliser que la lemmatisation, mais il est moins 
 
 La vectorisation consiste à convertir les textes en une représentation numérique vectorielle exploitable par les algorithmes de machine learning. Une des méthodes couramment utilisées consiste à associer à chaque mot un index unique, et à compter le nombre de fois que chaque mot apparaît dans chaque texte. On normalise ensuite ces comptes pour obtenir des vecteurs de fréquences de mots de taille fixe.
 
+#### N-grammes
+
+N-grammes sont des séquences de n mots consécutifs dans un texte. Les n-grammes sont utilisés pour capturer les relations entre les mots et les phrases dans un texte. Par exemple, un n-gramme de taille 2 (bigramme) pour le texte "I love biscuits" serait "I love" et "love biscuits". Les n-grammes permettent de capturer des informations contextuelles plus riches que les mots individuels.
+
 :::{image} ./assets/n-gram.png
 :alt: N-gram illustration
-:width: 600px
+:width: 450px
 :::
 
 #### Utilisation de la fréquences des mots pour normaliser les données
@@ -148,13 +178,6 @@ Pour chaque fréquence d'un mot observé dans un document, on multiplie cette fr
 $$\text{TF-IDF}(t, d) = \text{TF}(t, d) \times \text{IDF}(t)$$
 
 Cela permet de donner plus de poids aux mots rares et moins de poids aux mots fréquents.
-
-### Explication des paramètres
-
-Les stopwords sont définis en français pour filtrer les mots inutiles, comme les articles, prépositions et autres mots courants en français. La langue française est également utilisée pour configurer le stemming (réduction des mots à leur racine) ainsi que la tokenisation, qui divise le texte en mots.
-
-Dans la partie vectorisation, nous utilisons le paramètre min_df, qui représente le nombre minimum d'occurrences d'un mot dans les documents pour qu'il soit inclus dans la représentation vectorielle. Ici, un mot doit apparaître au moins 5 fois pour être retenu. Le paramètre max_df définit un seuil maximal d'apparition au-delà duquel un mot est exclu du vocabulaire, afin d’éviter l’inclusion de mots trop fréquents et peu informatifs. Enfin, le paramètre lowercase convertit tous les mots en minuscules pour uniformiser les termes.
-
 
 ## Les modèles
 
@@ -209,9 +232,9 @@ Inconvénients :
 
 :::{mermaid}
 flowchart LR
-    A[(Labeled data)] --> G[Unescape HTML]
+    A[(Labeled data)] --> G[Clean Text]
     G --> H[Tokeniser]
-    H --> I[Stop Word Removal]
+    H --> I[Stemmer]
     I --> B[CountVectorizer]
     B --> C[TfidfTransformer]
     
@@ -263,8 +286,12 @@ Le schéma ci-dessous illustre le processus complet d'entraînement des modèles
 :alt: Pipeline of model training
 :::
 
-Voici les divers paramètres utilisés pour chaque modèle :
+### Les paramètres des modèles
 
+* La liste des mots d'arrêts provient de la librairie `nltk` pour le français.
+* Le tokeniser est word_tokenize de `nltk` qui utilise une version amélioré du TreeBankWordTokenizer avec le PunktSentenceTokenizer pour la langue française.
+* Le stemmer est le SnowballStemmer de `nltk` pour le français.
+* Le CountVectorizer utilise le paramètre `min_df` à 5 et `max_df` à 0.7. Cela signifie qu'un mot doit apparaître au moins 5 fois dans les documents pour être retenu et qu'un mot qui apparaît dans plus de 70 % des documents est exclu. 
 * L'échantillion d'entraînement représente $70 \%$ des données et l'échantillon de test $30 \%$.
 * Les hyperparamètres suivant sont ajustés pour chaque modèle :
     - CountVectorizer : `ngram_range` soit (1,1) ou (1,2)
